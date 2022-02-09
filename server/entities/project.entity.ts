@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany } from 'typeorm';
 import { RefreshToken } from './refresh_token.entity';
 import { UserRole } from './user_role.entity';
+import { User } from './user.entity';
 
 @Entity()
 export class Project {
@@ -8,20 +9,18 @@ export class Project {
   projectID: number;
 
   @Column({ unique: true, nullable: false })
-  email: string;
+  Title: string;
 
-  @Column({ nullable: false })
-  firstName: string;
+  @Column()
+  ProjectManagerID: string;
 
-  @Column({ nullable: false })
-  lastName: string;
+  // @OneToMany(() => RefreshToken, (token) => token.user)
+  // refreshTokens: RefreshToken[];
 
-  @Column({ nullable: false })
-  passwordHash: string;
+  // @OneToMany(() => UserRole, (userRole) => userRole.user, { cascade: true })
+  // userRoles: UserRole[];
 
-  @OneToMany(() => RefreshToken, (token) => token.user)
-  refreshTokens: RefreshToken[];
+  @ManyToMany(() => User, (user) => user.userRoles)
+  users: User[];
 
-  @OneToMany(() => UserRole, (userRole) => userRole.user, { cascade: true })
-  userRoles: UserRole[];
 }
