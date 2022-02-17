@@ -1,17 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
 import { ApiContext } from '../../utils/api_context';
-import { AuthContext } from '../../utils/auth_context';
-import { RolesContext } from '../../utils/roles_context';
+import { Header } from '../common/header';
 import { Button } from '../common/button';
+import { useNavigate } from 'react-router';
 
 export const Home = () => {
-  const [, setAuthToken] = useContext(AuthContext);
   const api = useContext(ApiContext);
-  const roles = useContext(RolesContext);
-
-  const navigate = useNavigate();
-
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   useEffect(async () => {
@@ -19,12 +13,10 @@ export const Home = () => {
     setUser(res.user);
     setLoading(false);
   }, []);
+  const navigate = useNavigate();
 
-  const logout = async () => {
-    const res = await api.del('/sessions');
-    if (res.success) {
-      setAuthToken(null);
-    }
+  const goToProjectPage = () => {
+    navigate('/projectPage');
   };
 
   if (loading) {
@@ -32,16 +24,15 @@ export const Home = () => {
   }
 
   return (
-    <div className="p-4">
-      <h1>Welcome {user.firstName}</h1>
-      <Button type="button" onClick={logout}>
-        Logout
-      </Button>
-      {roles.includes('admin') && (
-        <Button type="button" onClick={() => navigate('/admin')}>
-          Admin
+    <div className='dashboard'>
+      <Header text="Project Dashboard"></Header>
+      <div className='pageBody'>
+        <h3>Projects:</h3>
+        <Button type="button" onClick={goToProjectPage}>
+          Go To Project Page
         </Button>
-      )}
+      </div>
     </div>
+    
   );
 };
