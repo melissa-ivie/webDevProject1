@@ -16,9 +16,6 @@ export class Project {
   @Column("text", {array: true})
   userEmails: string[];
 
-  // @Column()
-  // userEmails: string;
-
   @ManyToMany(() => User, (user) => user.email)
   users: User[];
 

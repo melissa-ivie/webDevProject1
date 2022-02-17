@@ -6,12 +6,18 @@ import { useNavigate } from 'react-router';
 
 export const Home = () => {
   const api = useContext(ApiContext);
+  var userProjects = [];
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [projects, setProjects] = useState(null);
   useEffect(async () => {
     const res = await api.get('/users/me');
     setUser(res.user);
     setLoading(false);
+  }, []);
+  useEffect(async () => {
+    const res = await api.get('/projects');
+    setProjects(res.projects);
   }, []);
   const navigate = useNavigate();
 
@@ -21,6 +27,19 @@ export const Home = () => {
 
   const goToNewProjectPage = () => {
     navigate('/newProjectPage');
+  };
+  
+  const getProjects = (email, id) => {
+    let projectsObj = {};
+    for(const proj in projects){
+      let currentProject = projects[proj]
+      let emails = currentProject.userEmails;
+      let prID = currentProject.id; 
+      if((Object.values(emails).indexOf(email) > -1) || (currentProject.projectLeaderID == id)){
+        projectsObj[prID] = currentProject.title;
+      }
+    }
+    userProjects = Object.assign(userProjects,projectsObj)
   };
 
   if (loading) {
@@ -32,9 +51,13 @@ export const Home = () => {
       <Header text="Project Dashboard"></Header>
       <div className='pageBody'>
         <h3>Projects:</h3>
-        <Button type="button" onClick={goToProjectPage}>
-          Go To Project Page
-        </Button>
+        <div id='projectList'> {getProjects(user.email, user.id)}</div>
+        {/* <p onload={getProjects(user.email, user.id)}></p> */}
+        <h3>
+          {userProjects.map((pro) => {
+            return <h4><Button type="button" onClick={goToProjectPage}>{pro}</Button></h4>
+          })}
+        </h3>
         <Button type="button" onClick={goToNewProjectPage}>
           Add New Project
        </Button>

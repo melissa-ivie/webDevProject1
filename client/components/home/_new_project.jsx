@@ -32,9 +32,15 @@ export const NewProject = () => {
         }
 
         const projectLeaderID = user.id;
-        const leaderEmail = user.email;
-        var users = userEmails.split(',')
-        //user.push(leaderEmail);
+        const leaderEmail = String(user.email);
+        let users = [];
+        users = userEmails.split(',');
+        console.log(users)
+        lEmail = {
+          leader: leaderEmail
+        }
+        users = Object.assign(users,lEmail)
+  
       
         fetch('/project', {
             method: 'POST',

@@ -16,19 +16,18 @@ export class ProjectsController {
     private usersService: UsersService,
   ) {}
 
+  @Get('/projects')
+  async index() {
+    const projects = await this.projectService.findAll();
+    return { projects };
+  }
+
   @Post('/project')
   @Skip(AuthGuard)
   async create(@Body() body: CreateProjectDto, @Res({ passthrough: true }) res: Response) {
     const newProject = new Project();
     newProject.title = body.title;
     newProject.projectLeaderID = body.projectLeaderID;
-    // var projectUsers: User[] = [];
-    //var address: string[] = [];
-    // for(let i=0; i < body.users.length; i++){
-    //   var address = body.users[i];
-    //   var user = await this.usersService.findEmail(address);
-    //   projectUsers.push(user)
-    // }
     newProject.userEmails = body.users;
     
     try {
