@@ -54,7 +54,7 @@ export const NewProject = () => {
                 users, 
             })
         })
-        navigate('/#');
+        navigate('/');
     };
 
   return (
