@@ -13,7 +13,13 @@ export class Project {
   @Column()
   title: string;
 
-  @ManyToMany(() => User, (user) => user.id)
+  @Column("text", {array: true})
+  userEmails: string[];
+
+  // @Column()
+  // userEmails: string;
+
+  @ManyToMany(() => User, (user) => user.email)
   users: User[];
 
   // @OneToMany(() => Task, (task) => task.id)

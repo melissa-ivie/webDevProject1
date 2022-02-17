@@ -22,10 +22,16 @@ export class AddingProject1645109419318 implements MigrationInterface {
                 type: 'int',
                 isNullable: false,
               },
+              {
+                name: 'userEmails',
+                type: 'text[]',
+                isNullable: true,
+              },
             ],
           }),
         );
       }
+      
     
       public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropTable('project');

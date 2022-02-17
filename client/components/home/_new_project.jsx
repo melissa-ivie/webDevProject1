@@ -9,7 +9,7 @@ export const NewProject = () => {
     const api = useContext(ApiContext);
     const navigate = useNavigate();
     const [title, setTitle] = useState('');
-    //const [users, setUsers] = useState('');
+    const [userEmails, setUsers] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
@@ -32,16 +32,10 @@ export const NewProject = () => {
         }
 
         const projectLeaderID = user.id;
-        data = {
-            title,
-            //users,
-            projectLeaderID,
-        }
-
-        // var request = new XMLHttpRequest();
-        // request.open('POST', '/project', true);
-        // request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-        // request.send(data);
+        const leaderEmail = user.email;
+        var users = userEmails.split(',')
+        //user.push(leaderEmail);
+      
         fetch('/project', {
             method: 'POST',
             headers: {
@@ -51,9 +45,9 @@ export const NewProject = () => {
             body: JSON.stringify({
                 title,
                 projectLeaderID,
+                users, 
             })
         })
-        console.log("here")
         navigate('/#');
     };
 
@@ -63,6 +57,8 @@ export const NewProject = () => {
         <Paper>
           <div>Project Title</div>
           <Input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <div>Emails of Project Members (seperate with commas)</div>
+          <Input type="text" value={userEmails} onChange={(e) => setUsers(e.target.value)} />
           <div className="flex flex-row justify-end mt-2">
             <Button type="button" onClick={newProject}>
               Add New Project
