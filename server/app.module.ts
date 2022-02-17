@@ -9,12 +9,14 @@ import { RolesGuard } from './providers/guards/roles.guard';
 import { JwtService } from './providers/services/jwt.service';
 import { RolesService } from './providers/services/roles.service';
 import { UsersService } from './providers/services/users.service';
+import { ProjectsService } from './providers/services/projects.service';
 import { GuardUtil } from './providers/util/guard.util';
 
 @Module({
   imports: [TypeOrmModule.forRoot(config), UsersModule],
   controllers: [AppController],
   providers: [
+    ProjectsService,
     UsersService,
     RolesService,
     JwtService,

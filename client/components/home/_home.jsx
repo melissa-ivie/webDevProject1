@@ -19,6 +19,10 @@ export const Home = () => {
     navigate('/projectPage');
   };
 
+  const goToNewProjectPage = () => {
+    navigate('/newProjectPage');
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -31,6 +35,9 @@ export const Home = () => {
         <Button type="button" onClick={goToProjectPage}>
           Go To Project Page
         </Button>
+        <Button type="button" onClick={goToNewProjectPage}>
+          Add New Project
+       </Button>
       </div>
     </div>
     

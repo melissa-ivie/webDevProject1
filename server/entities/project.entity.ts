@@ -8,7 +8,7 @@ export class Project {
   id: number;
 
   @Column()
-  ProjectLeaderID: string;
+  projectLeaderID: number;
 
   @Column()
   title: string;
@@ -16,7 +16,7 @@ export class Project {
   @ManyToMany(() => User, (user) => user.id)
   users: User[];
 
-  @OneToMany(() => Task, (task) => task.id)
-  tasks: Task[];
+  // @OneToMany(() => Task, (task) => task.id)
+  // tasks: Task[];
 
 }
