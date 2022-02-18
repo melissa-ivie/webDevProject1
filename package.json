@@ -2,7 +2,7 @@
   "name": "nest-starter-app",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Command Line Crusaders",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -92,7 +92,9 @@
     "moduleNameMapper": {
       "^server/(.*)$": "<rootDir>/$1"
     },
-    "moduleDirectories": ["node_modules"],
+    "moduleDirectories": [
+      "node_modules"
+    ],
     "rootDir": "./server",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {

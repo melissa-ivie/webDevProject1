@@ -1,27 +1,25 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { RefreshToken } from './refresh_token.entity';
-import { UserRole } from './user_role.entity';
+import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, ManyToMany, Column } from 'typeorm';
+import { User } from './user.entity';
+import { Task } from './task.entity'
 
 @Entity()
 export class Project {
   @PrimaryGeneratedColumn()
-  projectID: number;
+  id: number;
 
-  @Column({ unique: true, nullable: false })
-  email: string;
+  @Column()
+  projectLeaderID: number;
 
-  @Column({ nullable: false })
-  firstName: string;
+  @Column()
+  title: string;
 
-  @Column({ nullable: false })
-  lastName: string;
+  @Column("text", {array: true})
+  userEmails: string[];
 
-  @Column({ nullable: false })
-  passwordHash: string;
+  @ManyToMany(() => User, (user) => user.email)
+  users: User[];
 
-  @OneToMany(() => RefreshToken, (token) => token.user)
-  refreshTokens: RefreshToken[];
+  // @OneToMany(() => Task, (task) => task.id)
+  // tasks: Task[];
 
-  @OneToMany(() => UserRole, (userRole) => userRole.user, { cascade: true })
-  userRoles: UserRole[];
 }

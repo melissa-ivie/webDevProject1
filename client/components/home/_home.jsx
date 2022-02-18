@@ -1,30 +1,45 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
 import { ApiContext } from '../../utils/api_context';
-import { AuthContext } from '../../utils/auth_context';
-import { RolesContext } from '../../utils/roles_context';
+import { Header } from '../common/header';
 import { Button } from '../common/button';
+import { useNavigate } from 'react-router';
 
 export const Home = () => {
-  const [, setAuthToken] = useContext(AuthContext);
   const api = useContext(ApiContext);
-  const roles = useContext(RolesContext);
-
-  const navigate = useNavigate();
-
+  var userProjects = [];
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [projects, setProjects] = useState(null);
   useEffect(async () => {
     const res = await api.get('/users/me');
     setUser(res.user);
     setLoading(false);
   }, []);
+  useEffect(async () => {
+    const res = await api.get('/projects');
+    setProjects(res.projects);
+  }, []);
+  const navigate = useNavigate();
 
-  const logout = async () => {
-    const res = await api.del('/sessions');
-    if (res.success) {
-      setAuthToken(null);
+  const goToProjectPage = () => {
+    navigate('/projectPage');
+  };
+
+  const goToNewProjectPage = () => {
+    navigate('/newProjectPage');
+  };
+  
+  const getProjects = (email, id) => {
+    let projectsObj = {};
+    for(const proj in projects){
+      let currentProject = projects[proj]
+      let emails = currentProject.userEmails;
+      let prID = currentProject.id; 
+      if((Object.values(emails).indexOf(email) > -1) || (currentProject.projectLeaderID == id)){
+        projectsObj[prID] = currentProject.title;
+      }
     }
+    userProjects = Object.assign(userProjects,projectsObj)
   };
 
   if (loading) {
@@ -32,16 +47,20 @@ export const Home = () => {
   }
 
   return (
-    <div className="p-4">
-      <h1>Welcome {user.firstName}</h1>
-      <Button type="button" onClick={logout}>
-        Logout
-      </Button>
-      {roles.includes('admin') && (
-        <Button type="button" onClick={() => navigate('/admin')}>
-          Admin
-        </Button>
-      )}
+    <div className='dashboard'>
+      <Header text="Project Dashboard"></Header>
+      <div className='pageBody'>
+        <h3>Projects:</h3>
+        <div className='projectList'> {getProjects(user.email, user.id)}
+          {userProjects.map((pro) => {
+            return <h4><Button type="button" onClick={goToProjectPage}>{pro}</Button></h4>
+          })}
+        </div>
+        <Button type="button" onClick={goToNewProjectPage}>
+          Add New Project
+       </Button>
+      </div>
     </div>
+    
   );
 };
