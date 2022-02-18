@@ -51,13 +51,11 @@ export const Home = () => {
       <Header text="Project Dashboard"></Header>
       <div className='pageBody'>
         <h3>Projects:</h3>
-        <div id='projectList'> {getProjects(user.email, user.id)}</div>
-        {/* <p onload={getProjects(user.email, user.id)}></p> */}
-        <h3>
+        <div className='projectList'> {getProjects(user.email, user.id)}
           {userProjects.map((pro) => {
             return <h4><Button type="button" onClick={goToProjectPage}>{pro}</Button></h4>
           })}
-        </h3>
+        </div>
         <Button type="button" onClick={goToNewProjectPage}>
           Add New Project
        </Button>

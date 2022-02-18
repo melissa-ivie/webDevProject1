@@ -57,6 +57,10 @@ export const NewProject = () => {
         navigate('/');
     };
 
+    const cancelAdd = async () => {
+      navigate('/');
+    };
+
   return (
     <div className="flex flex-row justify-center m-4">
       <div className="w-96">
@@ -68,6 +72,9 @@ export const NewProject = () => {
           <div className="flex flex-row justify-end mt-2">
             <Button type="button" onClick={newProject}>
               Add New Project
+            </Button>
+            <Button type="button" onClick={cancelAdd}>
+              Cancel
             </Button>
           </div>
           <div className="flex">{errorMessage}</div>
