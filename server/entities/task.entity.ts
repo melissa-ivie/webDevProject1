@@ -24,5 +24,4 @@ export class Task {
 
   @OneToMany(() => Project, (project) => project.id)
   project: Project;
-
 }

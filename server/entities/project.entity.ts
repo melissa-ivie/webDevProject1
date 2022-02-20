@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, ManyToMany, Column } from 'typeorm';
 import { User } from './user.entity';
-import { Task } from './task.entity'
+import { Task } from './task.entity';
 
 @Entity()
 export class Project {
@@ -13,13 +13,12 @@ export class Project {
   @Column()
   title: string;
 
-  @Column("text", {array: true})
+  @Column('text', { array: true })
   userEmails: string[];
 
   @ManyToMany(() => User, (user) => user.email)
   users: User[];
 
-  // @OneToMany(() => Task, (task) => task.id)
-  // tasks: Task[];
-
+  @OneToMany(() => Task, (task) => task.id)
+  tasks: Task[];
 }
