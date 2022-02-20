@@ -3,3 +3,45 @@
 @tailwind components;
 
 @tailwind utilities;
+
+.head1{
+    display: inline-block;
+    width: 100%;
+    align-content: center;
+    color: white; 
+    background-color: rgb(14, 77, 77); 
+    position: fixed;
+    padding: 3px;
+    padding-top: 20px;
+}
+
+h1 { 
+    display: inline;
+    font-size: 30px;
+    font-weight: 300;
+    font-family: Verdana;
+    vertical-align: middle;
+    margin-left: 36%;
+}
+
+.logoutButton{
+    margin-left:80%;
+    vertical-align: middle;
+}
+
+.pageBody{
+    padding-top: 15%;
+    padding-left: 15%;
+}
+
+h4{
+    padding-top: 5px; 
+}
+
+.projectList{
+    padding-bottom: 40px;
+}
+
+.projectButton{
+    background-color: darkgreen;
+}
