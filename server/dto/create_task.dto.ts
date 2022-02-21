@@ -1,3 +1,4 @@
+import { Project } from 'server/entities/project.entity';
 import { User } from 'server/entities/user.entity';
 
 export class CreateTaskDto {
@@ -6,4 +7,5 @@ export class CreateTaskDto {
   description: string;
   status: string;
   assignedUser: User;
+  project: Project;
 }

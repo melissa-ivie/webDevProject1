@@ -32,6 +32,7 @@ export class TasksController {
     newTask.status = body.status;
     newTask.timeEstimation = body.timeEstimation;
     newTask.assignedUser = body.assignedUser;
+    newTask.project = body.project;
 
     try {
       const task = await this.tasksServices.create(newTask);
