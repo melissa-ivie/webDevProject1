@@ -72,7 +72,11 @@ export const NewTask = () => {
           <div>Task ETA</div>
           <Input type="text" value={time} onChange={(e) => setTime(e.target.value)} />
           <div>Mark as complete?</div>
-          <Input type="text" value={status} onChange={(e) => setStatus(e.target.value)} />
+          <select name="completed" id="completed" value={status} onChange={(e) => setStatus(e.target.value)}>
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select>
+          {/* <Input type="text" value={status} onChange={(e) => setStatus(e.target.value)} /> */}
           <div className="flex flex-row justify-end mt-2">
             <Button type="button" onClick={newTask}>
               Add New Task
