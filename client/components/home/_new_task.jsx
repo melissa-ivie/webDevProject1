@@ -16,6 +16,8 @@ export const NewTask = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  var projectID = parseInt(sessionStorage.getItem("projectID"));
+
   useEffect(async () => {
     const res = await api.get('/users/me');
     setUser(res.user);
@@ -49,6 +51,7 @@ export const NewTask = () => {
         description,
         assignedUser,
         timeEstimation,
+        projectID,
         status,
       })
     })

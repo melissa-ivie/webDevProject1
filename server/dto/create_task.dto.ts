@@ -7,5 +7,6 @@ export class CreateTaskDto {
   description: string;
   status: string;
   assignedUser: User;
+  projectID: number;
   project: Project;
 }

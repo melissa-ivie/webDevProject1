@@ -21,7 +21,9 @@ export const Home = () => {
   }, []);
   const navigate = useNavigate();
 
-  const goToProjectPage = () => {
+  const goToProjectPage = (p, pro) => {
+    sessionStorage.setItem("selectedProject", pro);
+    getProjectID(); 
     navigate('/projectPage');
   };
 
@@ -30,6 +32,8 @@ export const Home = () => {
   };
   
   const getProjects = (email, id) => {
+    sessionStorage.setItem("selectedProject", "None");
+    sessionStorage.setItem("projectID", "0");
     let projectsObj = {};
     for(const proj in projects){
       let currentProject = projects[proj]
@@ -40,6 +44,18 @@ export const Home = () => {
       }
     }
     userProjects = Object.assign(userProjects,projectsObj)
+  };
+
+  const getProjectID = () => {
+    selected = sessionStorage.getItem("selectedProject");
+    for(const proj in projects){
+      let currentProject = projects[proj]
+      let title = currentProject.title;
+      let id = currentProject.id
+      if((selected == title)){
+        sessionStorage.setItem("projectID", String(id))
+      }
+    }
   };
 
   if (loading) {
@@ -53,7 +69,7 @@ export const Home = () => {
         <h3>Projects:</h3>
         <div className='projectList'> {getProjects(user.email, user.id)}
           {userProjects.map((pro) => {
-            return <h4><Button type="button" onClick={goToProjectPage}>{pro}</Button></h4>
+            return <h4><Button type="button" onClick={p => goToProjectPage(p,pro)}>{pro}</Button></h4>
           })}
         </div>
         <Button type="button" onClick={goToNewProjectPage}>

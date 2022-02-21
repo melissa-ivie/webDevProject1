@@ -32,6 +32,7 @@ export class TasksController {
     newTask.status = body.status;
     newTask.timeEstimation = body.timeEstimation;
     newTask.assignedUser = body.assignedUser;
+    newTask.projectID = body.projectID;
     newTask.project = body.project;
 
     try {

@@ -19,6 +19,9 @@ export class Task {
   @Column()
   status: string;
 
+  @Column()
+  projectID: number;
+
   @ManyToOne(() => User, (user) => user.id)
   assignedUser: User;
 
