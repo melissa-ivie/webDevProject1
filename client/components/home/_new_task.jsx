@@ -41,7 +41,7 @@ export const NewTask = () => {
     fetch('/task', {
       method: 'POST',
       headers: {
-        Accept: 'application/json',
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -50,8 +50,8 @@ export const NewTask = () => {
         assignedUser,
         time,
         status,
-      }),
-    });
+      })
+    })
     navigate('/projectPage');
   };
 
@@ -76,7 +76,6 @@ export const NewTask = () => {
             <option value="no">No</option>
             <option value="yes">Yes</option>
           </select>
-          {/* <Input type="text" value={status} onChange={(e) => setStatus(e.target.value)} /> */}
           <div className="flex flex-row justify-end mt-2">
             <Button type="button" onClick={newTask}>
               Add New Task
