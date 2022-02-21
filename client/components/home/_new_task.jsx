@@ -5,7 +5,7 @@ import { Paper } from '../common/paper';
 import { Input } from '../common/input';
 import { Button } from '../common/button';
 
-export const NewProject = () => {
+export const NewTask = () => {
   const api = useContext(ApiContext);
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
