@@ -11,7 +11,7 @@ export const NewTask = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [assignedUser, setAssignedUser] = useState('');
-  const [time, setTime] = useState('');
+  const [timeEstimation, setTimeEstimation] = useState('');
   const [status, setStatus] = useState('false');
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(true);
@@ -33,7 +33,7 @@ export const NewTask = () => {
     } else if (description === '') {
       setErrorMessage('Task Description cannot be blank');
       return;
-    } else if (time === '') {
+    } else if (timeEstimation === '') {
       setErrorMessage('Task ETA cannot be blank');
       return;
     }
@@ -48,7 +48,7 @@ export const NewTask = () => {
         title,
         description,
         assignedUser,
-        time,
+        timeEstimation,
         status,
       }),
     });
@@ -70,7 +70,7 @@ export const NewTask = () => {
           <div>Assigned user to task (enter email)</div>
           <Input type="text" value={assignedUser} onChange={(e) => setAssignedUser(e.target.value)} />
           <div>Task ETA</div>
-          <Input type="text" value={time} onChange={(e) => setTime(e.target.value)} />
+          <Input type="text" value={timeEstimation} onChange={(e) => setTimeEstimation(e.target.value)} />
           <div>Mark as complete?</div>
           <Input type="text" value={status} onChange={(e) => setStatus(e.target.value)} />
           <div className="flex flex-row justify-end mt-2">
