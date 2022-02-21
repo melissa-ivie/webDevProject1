@@ -67,7 +67,7 @@ export const ProjectPage = () => {
       <Header text="Project Page"></Header>
       <div className='pageBody'>
         <h3>Tasks:</h3>
-        {/* {getTasks(project.id) */}
+        {/* {getTasks(project.id)} */}
         <div className='taskList'>
         </div>
         <Button type="button" onClick={goToNewTaskPage}>Add Task</Button>

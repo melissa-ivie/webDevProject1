@@ -26,7 +26,7 @@ export const NewTask = () => {
     }
 
     const cancelAdd = async () => {
-        navigate('/');
+        navigate('/projectPage');
       };
 
     return (
@@ -35,7 +35,7 @@ export const NewTask = () => {
             <Paper>
                 <div>Task Title</div>
                 <Input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-                <div>Emails of Project Members (seperate with commas)</div>
+                <div>Description:</div>
                 <Input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
                 <div className="flex flex-row justify-end mt-2">
                 <Button type="button" onClick={newTask}>
