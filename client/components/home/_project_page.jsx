@@ -25,7 +25,7 @@ export const ProjectPage = () => {
   // Should this be '/project/:id/new_task',
   // or just '/new_task'?
   const goToNewTaskPage = () =>{
-    navigate('/new_task')
+    navigate('/newTask')
   }
 
   // not sure if we need to get the project id, 
