@@ -14,9 +14,10 @@ import { ProjectsService } from 'server/providers/services/projects.service';
 import { ProjectsController } from 'server/controllers/projects.controller';
 import { RolesService } from 'server/providers/services/roles.service';
 import { UserRole } from 'server/entities/user_role.entity';
+import { Task } from 'server/entities/task.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, RefreshToken, Role, UserRole, Project])],
+  imports: [TypeOrmModule.forFeature([User, RefreshToken, Role, UserRole, Project, Task])],
   controllers: [SessionsController, UsersController, RefreshTokensController, ProjectsController],
   providers: [UsersService, RolesService, RefreshTokensService, JwtService, ProjectsService],
   exports: [TypeOrmModule],

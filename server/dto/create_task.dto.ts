@@ -1,7 +1,9 @@
+import { User } from 'server/entities/user.entity';
+
 export class CreateTaskDto {
   title: string;
-  timeEstimation: number;
+  timeEstimation: string;
   description: string;
-  status: boolean;
-  assignedUser: string;
+  status: string;
+  assignedUser: User;
 }
