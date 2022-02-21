@@ -32,8 +32,10 @@ export const NewTask = () => {
       return;
     } else if (description === '') {
       setErrorMessage('Task Description cannot be blank');
+      return;
     } else if (time === '') {
       setErrorMessage('Task ETA cannot be blank');
+      return;
     }
 
     fetch('/task', {
