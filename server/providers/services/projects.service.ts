@@ -24,9 +24,9 @@ export class ProjectsService {
 //     return this.usersRespository.findOne(options, { relations });
 //   }
 
-//   find(id: number, relations: string[] = []) {
-//     return this.usersRespository.findOne(id, { relations });
-//   }
+  find(id: number, relations: string[] = []) {
+    return this.projectsRespository.findOne(id, { relations });
+  }
 
   create(newProject: Project) {
     return this.projectsRespository.save(newProject);

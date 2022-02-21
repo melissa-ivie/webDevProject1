@@ -11,10 +11,17 @@ export const ProjectPage = () => {
   const [tasks, setTasks] = useState(null);
   const [user, setUser] = useState(null);
   const [project, setProject] = useState(null);
+  const [projectID, setProjectID] = useState(null);
   useEffect(async () => {
     const res = await api.get('/users/me');
     setUser(res.user);
     setLoading(false);
+  }, []);
+
+  //get projectID
+  useEffect(async () => {
+    const res = await api.get('/projectID');
+    setProjectID(res.projectID);
   }, []);
   const navigate = useNavigate();
 
@@ -28,30 +35,15 @@ export const ProjectPage = () => {
     navigate('/newTask')
   }
 
-  // not sure if we need to get the project id, 
-  //but this is copied and pasted from _home.jsx
-  const getProjects = (email, id) => {
-    let projectsObj = {};
-    for(const proj in projects){
-      let currentProject = projects[proj]
-      let emails = currentProject.userEmails;
-      let prID = currentProject.id; 
-      if((Object.values(emails).indexOf(email) > -1) || (currentProject.projectLeaderID == id)){
-        projectsObj[prID] = currentProject.title;
-      }
-    }
-  };
-  
   //Need to get the project id
   //id keeps returning null.
-  const getTasks = (id) => {
+  const getTasks = (projectID) => {
     let tasksObj = {};
-    currentProjectID = getProjects;
     for(const task in tasks){
       let currentTask = tasks[task];
       let taskID = currentTask.id;
       tasksObj[taskID] = currentTask.title;
-      if((project.id == id)){
+      if((projectID != null)){
         projectTasks = Object.assign(projectTasks, tasksObj)
       }
     }
@@ -67,8 +59,7 @@ export const ProjectPage = () => {
       <Header text="Project Page"></Header>
       <div className='pageBody'>
         <h3>Tasks:</h3>
-        {/* {getTasks(project.id)} */}
-        <div className='taskList'>
+        <div className='taskList'> {getTasks(projectID)}
         </div>
         <Button type="button" onClick={goToNewTaskPage}>Add Task</Button>
         <Button type="button" onClick={goToDashboard}>
