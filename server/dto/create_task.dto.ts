@@ -6,6 +6,7 @@ export class CreateTaskDto {
   timeEstimation: string;
   description: string;
   status: string;
+  assignee: string;
   assignedUser: User;
   projectID: number;
   project: Project;

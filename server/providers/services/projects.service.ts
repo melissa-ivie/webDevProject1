@@ -20,12 +20,14 @@ export class ProjectsService {
     return this.projectsRespository.find({ relations });
   }
 
-//   findBy(options: Record<string, any>, relations: string[] = []) {
-//     return this.usersRespository.findOne(options, { relations });
-//   }
+  findBy(options: Record<number, any>) {
+    return this.projectsRespository.findOne(options);
+  }
 
   find(id: number, relations: string[] = []) {
     return this.projectsRespository.findOne(id, { relations });
+    
+    //return this.projectsRespository.findOne({id: seekid});
   }
 
   create(newProject: Project) {

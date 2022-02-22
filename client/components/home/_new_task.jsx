@@ -11,6 +11,8 @@ export const NewTask = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [assignedUser, setAssignedUser] = useState('');
+  const [assignee, setAssignee] = useState('');
+  const [project, setProject] = useState('');
   const [timeEstimation, setTimeEstimation] = useState('');
   const [status, setStatus] = useState('false');
   const [errorMessage, setErrorMessage] = useState('');
@@ -24,9 +26,14 @@ export const NewTask = () => {
     setLoading(false);
   }, []);
 
-  //if (loading) {
-    //return <div>Loading...</div>;
-  //}
+  useEffect(async () => {
+    const res = await api.get('/projectID');
+    console.log(res);
+    setProject(res.projectID);
+    setLoading(false);
+  }, []);
+
+  console.log(project);
 
   const newTask = async () => {
     if (title === '') {
@@ -37,6 +44,9 @@ export const NewTask = () => {
       return;
     } else if (timeEstimation === '') {
       setErrorMessage('Task ETA cannot be blank');
+      return;
+    } else if((project.projectLeaderID != user.id) && (assignee != user.email)) {
+      setErrorMessage('Only Project Leaders can assign tasks to other users.');
       return;
     }
 
@@ -53,6 +63,7 @@ export const NewTask = () => {
         timeEstimation,
         projectID,
         status,
+        assignee,
       })
     })
     navigate('/projectPage');
@@ -71,7 +82,7 @@ export const NewTask = () => {
           <div>Task Description</div>
           <Input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
           <div>Assigned user to task (enter email)</div>
-          <Input type="text" value={assignedUser} onChange={(e) => setAssignedUser(e.target.value)} />
+          <Input type="text" value={assignee} onChange={(e) => setAssignee(e.target.value)} />
           <div>Task ETA</div>
           <Input type="text" value={timeEstimation} onChange={(e) => setTimeEstimation(e.target.value)} />
           <div>Mark as complete?</div>

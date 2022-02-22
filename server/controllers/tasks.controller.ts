@@ -25,11 +25,7 @@ export class TasksController {
   @Post('/updateTask')
   @Skip(AuthGuard)
   async update(@Body() body: UpdateTaskDto, @Res({ passthrough: true }) res: Response) {
-    //const changeTask = await this.tasksService.find(body.id);
-    
     console.log("called update Task");
-    // console.log(changeTask);
-    // changeTask.status = body.status;
     try {
       const task = await this.tasksService.update(body.id, body.status);
       return { task };
@@ -45,6 +41,7 @@ export class TasksController {
     newTask.title = body.title;
     newTask.description = body.description;
     newTask.status = body.status;
+    newTask.assignee = body.assignee;
     newTask.timeEstimation = body.timeEstimation;
     //newTask.assignedUser = body.assignedUser;
     newTask.projectID = body.projectID;

@@ -11,10 +11,10 @@ export const ProjectPage = () => {
   var completeProjectTasks = [];
   const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState(null);
+  const [project, setProjects] = useState(null);
   const [user, setUser] = useState(null);
   const projectID = parseInt(sessionStorage.getItem("projectID"));
   const projectName = sessionStorage.getItem("selectedProject");
-  const projectRefresh = sessionStorage.getItem("refreshProject");
 
   useEffect(async () => {
     const res = await api.get('/users/me');
@@ -24,10 +24,16 @@ export const ProjectPage = () => {
 
   //get tasks
   useEffect(async () => {
-    console.log("inside use effect for tasks");
     const res = await api.get('/tasks');
     setTasks(res.tasks);
   }, []);
+
+  //get project for leaderID
+  // useEffect(async () => {
+  //   const res = await api.get('/pro');
+  //   setTasks(res.tasks);
+  // }, []);
+
   const navigate = useNavigate();
 
   const goToDashboard = () => {

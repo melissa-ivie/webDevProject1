@@ -43,6 +43,11 @@ export class AddTask1645396613250 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: 'assignee',
+            type: 'text',
+            isNullable: true,
+          },
+          {
             name: 'status',
             type: 'boolean',
             isNullable: false,

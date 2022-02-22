@@ -14,8 +14,8 @@ export class TasksService {
     return this.tasksRepository.find({ relations });
   }
 
-  find(id: number, relations: string[] = []) {
-    return this.tasksRepository.findOne(id, { relations });
+  find(seekid: number) {
+    return this.tasksRepository.findOne({ id: seekid });
   }
 
   update(newid: number, newstatus:string) {
