@@ -22,10 +22,10 @@ export const Header = (props) => {
     }, []);
 
     const logout = async () => {
-        // const res = await api.del('/sessions');
-        // if (res.success) {
-        //     setAuthToken(null);
-        // }
+        const res = await api.del('/sessions');
+        if (res.success) {
+            setAuthToken(null);
+        }
         navigate("/signin")
     };
 

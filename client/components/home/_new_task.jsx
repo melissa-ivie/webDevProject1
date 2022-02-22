@@ -27,19 +27,8 @@ export const NewTask = () => {
     setLoading(false);
   }, []);
 
-  // useEffect(async () => {
-  //   const res = await api.get('/projectID');
-  //   console.log("Return of project ID")
-  //   console.log(res);
-  //   setProject(res);
-  //   setLoading(false);
-  // }, []);
-
-  console.log(projectLeader);
 
   const newTask = async () => {
-    console.log("new Task project:")
-    console.log(project);
     if (title === '') {
       setErrorMessage('Task Title cannot be blank');
       return;
@@ -50,7 +39,7 @@ export const NewTask = () => {
       setErrorMessage('Task ETA cannot be blank');
       return;
     } else if((projectLeader != user.id) && (assignee != user.email)) {
-      setErrorMessage('Only Project Leaders can assign tasks to other users.');
+      setErrorMessage('Only Project Leader can assign tasks to other users.');
       return;
     }
 

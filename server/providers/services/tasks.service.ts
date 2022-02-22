@@ -19,9 +19,6 @@ export class TasksService {
   }
 
   update(newid: number, newstatus:string) {
-    console.log("inside service");
-    console.log(newid);
-    console.log(newstatus);
     return this.tasksRepository.update({ id: newid }, { status: newstatus }); // tries to update where quantity is 20...
     //return this.tasksRepository.update();
   }
