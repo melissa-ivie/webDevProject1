@@ -32,7 +32,6 @@ export const NewProject = () => {
         }
 
         const projectLeaderID = user.id;
-        console.log(projectLeaderID);
         const leaderEmail = String(user.email);
         let users = [];
         users = userEmails.split(',');
@@ -55,6 +54,7 @@ export const NewProject = () => {
             })
         })
         navigate('/');
+        window.location.reload(false);
     };
 
     const cancelAdd = async () => {

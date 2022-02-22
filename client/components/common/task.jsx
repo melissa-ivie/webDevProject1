@@ -1,15 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
-import { ApiContext } from '../../utils/api_context';
-import { AuthContext } from '../../utils/auth_context';
-import { RolesContext } from '../../utils/roles_context';
 import { Button } from '../common/button';
 
 
 export const Task = (props) => {
-    const api = useContext(ApiContext);
-    //const [user, setUser] = useState(null);
-    const navigate = useNavigate(); 
     
     var id = props.id;
     var user = props.user; 
@@ -31,13 +23,15 @@ export const Task = (props) => {
                 status, 
             })
         })
+
+        window.location.reload(false);
     };
 
     if(status == false){
         if(user.email == assignee){
             return (
                 <div className="task">
-                    <h5>{props.title}</h5>
+                    <h5 className='taskTitle'>{props.title}</h5>
                     <p>Description: {props.description}</p>
                     <p>Estimated Time: {props.time}</p>
                     <p>Assigned User: {assignee}</p>
@@ -49,7 +43,7 @@ export const Task = (props) => {
         }else{
             return (
                 <div className="task">
-                    <h5>{props.title}</h5>
+                    <h5 className='taskTitle'>{props.title}</h5>
                     <p>Description: {props.description}</p>
                     <p>Estimated Time: {props.time}</p>
                     <p>Assigned User: {assignee}</p>
@@ -60,7 +54,7 @@ export const Task = (props) => {
     }else{
         return (
             <div className="task">
-                <h5>{props.title}</h5>
+                <h5 className='taskTitle'>{props.title}</h5>
                 <p>Description: {props.description}</p>
                 <p>Estimated Time: {props.time}</p>
                 <p>Assigned User: {assignee}</p>

@@ -42,8 +42,7 @@ export const ProjectPage = () => {
     navigate('/');
   };
 
-  // Should this be '/project/:id/new_task',
-  // or just '/new_task'?
+//navigate to new task
   const goToNewTaskPage = () =>{
     navigate('/newTask')
   }
@@ -78,14 +77,14 @@ export const ProjectPage = () => {
     <div className='dashboard'>
       <Header text="Project Page"></Header>
       <div className='pageBody'>
-        <h3>Tasks for Project {projectName}</h3>
+        <h3 className='projectTitle'>Tasks for Project {projectName}</h3>
         <div className='taskList'>{getTasks()}
-          <div className='incompleteTask'> Incomplete Tasks:
+          <div className='incompleteTask'> <h5 className='taskCategory'>Incomplete Tasks:</h5>
               {incompleteProjectTasks.map((task) => {
                   return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status}projectID={task.projectID} id={task.id} assignee={task.assignee} user={user}></Task>
                 })}
           </div>
-          <div className='completeTask'> Complete Tasks:
+          <div className='completeTask'>  <h5 className='taskCategory'>Completed Tasks:</h5>
               {completeProjectTasks.map((task) => {
                   return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status} projectID={task.projectID} id={task.id} assignee={task.assignee} user={user}></Task>
                 })}

@@ -38,6 +38,9 @@ export const NewTask = () => {
     } else if (timeEstimation === '') {
       setErrorMessage('Task ETA cannot be blank');
       return;
+    } else if(assignee === '') {
+      setErrorMessage('Assignee can not be blank');
+      return;
     } else if((projectLeader != user.id) && (assignee != user.email)) {
       setErrorMessage('Only Project Leader can assign tasks to other users.');
       return;
@@ -60,6 +63,7 @@ export const NewTask = () => {
       })
     })
     navigate('/projectPage');
+    window.location.reload(false);
   };
 
   const cancelAdd = async () => {

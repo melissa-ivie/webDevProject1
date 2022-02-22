@@ -17,7 +17,7 @@
 
 h1 { 
     display: inline;
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 300;
     font-family: Verdana;
     vertical-align: middle;
@@ -67,8 +67,26 @@ h4{
 .completeTask {
     padding: 10px; 
     background-color: lightgray;
+    max-width: 70%;
 }
 
 .h5 {
-    font-weight: bold;
+    font-size: 20px;
+}
+
+.taskTitle{
+    font-size: large;
+    font-weight: bolder;
+}
+
+.taskCategory{
+    font-size: x-large;
+    font-weight: bolder;
+    color:rgb(14, 77, 77);
+    padding-bottom: 30px;
+}
+
+
+.projectTitle{
+    font-size: xx-large;
 }

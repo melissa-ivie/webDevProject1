@@ -27,6 +27,7 @@ export const Home = () => {
     sessionStorage.setItem("projectLeader", pro.projectLeaderID);
     getProjectID(); 
     navigate('/projectPage');
+    window.location.reload(false);
   };
 
   const goToNewProjectPage = () => {
