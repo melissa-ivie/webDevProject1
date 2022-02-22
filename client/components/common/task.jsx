@@ -7,10 +7,7 @@ import { Button } from '../common/button';
 
 
 export const Task = (props) => {
-    const navigate = useNavigate();
-
-    console.log(props.status);
-   
+    const navigate = useNavigate();   
     return (
         <div className="task">
             <h5>{props.title}</h5>
@@ -20,4 +17,6 @@ export const Task = (props) => {
             {/* <h5>{props.user}</h5> */}
         </div>
     );
+
+    
   };

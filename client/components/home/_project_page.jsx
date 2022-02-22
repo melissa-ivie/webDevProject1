@@ -7,7 +7,8 @@ import { Task } from '../common/task';
 
 export const ProjectPage = () => {
   const api = useContext(ApiContext);
-  var projectTasks = [];
+  var incompleteProjectTasks = [];
+  var completeProjectTasks = [];
   const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState(null);
   const [user, setUser] = useState(null);
@@ -40,18 +41,23 @@ export const ProjectPage = () => {
   }
 
 
-  //Need to get the project id
-  //id keeps returning null.
+  //Creates list of all tasks for the project
   const getTasks = () => {
-    let tasksObj = {};
+    let itasksObj = {};
+    let ctasksObj = {};
     for(const task in tasks){
       let currentTask = tasks[task];
       let taskID = currentTask.id;
       if((currentTask.projectID == projectID)){
-        tasksObj[taskID] = currentTask;
+        if(currentTask.status){
+          ctasksObj[taskID] = currentTask;
+        }else{
+          itasksObj[taskID] = currentTask;
+        }
       }
     }
-    projectTasks = Object.assign(projectTasks,tasksObj)
+    incompleteProjectTasks = Object.assign(incompleteProjectTasks,itasksObj)
+    completeProjectTasks = Object.assign(completeProjectTasks,ctasksObj)
   };
 
 
@@ -65,9 +71,17 @@ export const ProjectPage = () => {
       <div className='pageBody'>
         <h3>Tasks for Project {projectName}</h3>
         <div className='taskList'> {getTasks()}
-        {projectTasks.map((task) => {
-            return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status}></Task>
-          })}
+          <div className='incompleteTask'> Incomplete Tasks:
+              {incompleteProjectTasks.map((task) => {
+                  return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status}></Task>
+                })}
+          </div>
+          <div className='completeTask'> Complete Tasks:
+              {completeProjectTasks.map((task) => {
+                  return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status}></Task>
+                })}
+          </div>
+        
         </div>
         <Button type="button" onClick={goToNewTaskPage}>Add Task</Button>
         <Button type="button" onClick={goToDashboard}>

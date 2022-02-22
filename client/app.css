@@ -24,6 +24,11 @@ h1 {
     margin-left: 36%;
 }
 
+h3{
+    font-size: 20px;
+    font-weight: bold;
+}
+
 .logoutButton{
     margin-left:80%;
     vertical-align: middle;
@@ -57,6 +62,11 @@ h4{
     width: 30%; 
     padding: 20px; 
     overflow-wrap: break-word;
+}
+
+.completeTask {
+    padding: 10px; 
+    background-color: lightgray;
 }
 
 .h5 {
