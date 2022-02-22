@@ -31,6 +31,7 @@ export class ProjectsController {
     const newProject = new Project();
     newProject.title = body.title;
     newProject.projectLeaderID = body.projectLeaderID;
+    console.log(String(body.projectLeaderID));
     newProject.userEmails = body.users;
     
     try {

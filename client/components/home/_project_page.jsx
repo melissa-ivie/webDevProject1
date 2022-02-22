@@ -82,12 +82,12 @@ export const ProjectPage = () => {
         <div className='taskList'>{getTasks()}
           <div className='incompleteTask'> Incomplete Tasks:
               {incompleteProjectTasks.map((task) => {
-                  return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status}projectID={task.projectID} id={task.id}></Task>
+                  return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status}projectID={task.projectID} id={task.id} assignee={task.assignee} user={user}></Task>
                 })}
           </div>
           <div className='completeTask'> Complete Tasks:
               {completeProjectTasks.map((task) => {
-                  return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status} projectID={task.projectID} id={task.id}></Task>
+                  return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status} projectID={task.projectID} id={task.id} assignee={task.assignee} user={user}></Task>
                 })}
           </div>
         

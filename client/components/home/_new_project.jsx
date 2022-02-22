@@ -32,6 +32,7 @@ export const NewProject = () => {
         }
 
         const projectLeaderID = user.id;
+        console.log(projectLeaderID);
         const leaderEmail = String(user.email);
         let users = [];
         users = userEmails.split(',');

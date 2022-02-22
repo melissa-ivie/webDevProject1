@@ -7,14 +7,17 @@ import { Button } from '../common/button';
 
 
 export const Task = (props) => {
+    const api = useContext(ApiContext);
+    //const [user, setUser] = useState(null);
     const navigate = useNavigate(); 
+    
     var id = props.id;
+    var user = props.user; 
+    var assignee = props.assignee;
     var status = props.status;
     var changeTaskStatus = async () => {
         sessionStorage.setItem("refreshProject", "T")
-        console.log(id);
         if(status == false){
-            console.log("inside if");
             status = true; 
         }
         fetch('/updateTask', {
@@ -25,24 +28,34 @@ export const Task = (props) => {
             },
             body: JSON.stringify({
                 id,
-                status:true, 
+                status, 
             })
         })
     };
 
     if(status == false){
-        return (
-            <div className="task">
-                <h5>{props.title}</h5>
-                <p>Description: {props.description}</p>
-                <p>Estimated Time: {props.time}</p>
-                {/* <p>Status:{props.status}</p>  */}
-                {/* <h5>{props.user}</h5> */}
-                <Button type="button" onClick={changeTaskStatus}>
-                  Mark Task as Complete
-                </Button>
-            </div>
-        );
+        if(user.email == assignee){
+            return (
+                <div className="task">
+                    <h5>{props.title}</h5>
+                    <p>Description: {props.description}</p>
+                    <p>Estimated Time: {props.time}</p>
+                    <p>Assigned User: {assignee}</p>
+                    <Button type="button" onClick={changeTaskStatus}>
+                      Mark Task as Complete
+                    </Button>
+                </div>
+            );
+        }else{
+            return (
+                <div className="task">
+                    <h5>{props.title}</h5>
+                    <p>Description: {props.description}</p>
+                    <p>Estimated Time: {props.time}</p>
+                    <p>Assigned User: {assignee}</p>
+                </div>
+            );
+        }
 
     }else{
         return (
@@ -50,6 +63,7 @@ export const Task = (props) => {
                 <h5>{props.title}</h5>
                 <p>Description: {props.description}</p>
                 <p>Estimated Time: {props.time}</p>
+                <p>Assigned User: {assignee}</p>
             </div>
         );
 
