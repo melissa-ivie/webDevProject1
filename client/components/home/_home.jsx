@@ -72,7 +72,7 @@ export const Home = () => {
         <h3>Projects:</h3>
         <div className='projectList'> {getProjects(user.email, user.id)}
           {userProjects.map((pro) => {
-            return <h4><Button type="button" onClick={p => goToProjectPage(p,pro)}>{pro.title}</Button></h4>
+            return <h4><Button type="button" className="project" onClick={p => goToProjectPage(p,pro)}>{pro.title}</Button></h4>
           })}
         </div>
         <Button className="add" type="button" onClick={goToNewProjectPage}>

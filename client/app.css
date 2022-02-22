@@ -9,7 +9,7 @@
     width: 100%;
     align-content: center;
     color: white; 
-    background-color: rgb(14, 77, 77); 
+    background-color: rgb(153, 38, 109); 
     position: fixed;
     padding: 3px;
     padding-top: 20px;
@@ -100,4 +100,15 @@ h4{
 .return{
     background-color: aquamarine;
     padding: 10px
+}
+
+.project{
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: large;
+    padding: 30px;
+    background-color: rgb(14, 77, 77);
+    color: white;
+    box-shadow: 10px 10px #505064;
+    margin: 17px;
 }

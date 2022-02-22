@@ -70,9 +70,9 @@ export const ProjectPage = () => {
 
   return (
     <div className='dashboard'>
-      <Header text="Project Page"></Header>
+      <Header text={projectName}></Header>
       <div className='pageBody'>
-        <h3 className='projectTitle'>Tasks for Project {projectName}</h3>
+        <h3 className='projectTitle'>Tasks for {projectName}</h3>
         <Button className="return" type="button" onClick={goToDashboard}> Return To Project Dashboard </Button>
         <div className='taskList'>{getTasks()}
           <div className='incompleteTask'> <h5 className='taskCategory'>Incomplete Tasks:</h5>
