@@ -25,12 +25,13 @@ export class TasksController {
   @Post('/updateTask')
   @Skip(AuthGuard)
   async update(@Body() body: UpdateTaskDto, @Res({ passthrough: true }) res: Response) {
-    const changeTask = await this.tasksService.find(body.id);
+    //const changeTask = await this.tasksService.find(body.id);
+    
     console.log("called update Task");
-    console.log(changeTask);
-    changeTask.status = body.status;
+    // console.log(changeTask);
+    // changeTask.status = body.status;
     try {
-      const task = await this.tasksService.update(changeTask);
+      const task = await this.tasksService.update(body.id, body.status);
       return { task };
     } catch (e) {
       throw new HttpException(`Task update failed. ${e.message}`, HttpStatus.BAD_REQUEST);

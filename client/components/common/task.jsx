@@ -12,7 +12,7 @@ export const Task = (props) => {
     var status = props.status;
     var changeTaskStatus = async () => {
         sessionStorage.setItem("refreshProject", "T")
-        console.log(status);
+        console.log(id);
         if(status == false){
             console.log("inside if");
             status = true; 
@@ -28,20 +28,31 @@ export const Task = (props) => {
                 status:true, 
             })
         })
-      };
-    
-    return (
-        <div className="task">
-            <h5>{props.title}</h5>
-            <p>Description: {props.description}</p>
-            <p>Estimated Time: {props.time}</p>
-            {/* <p>Status:{props.status}</p>  */}
-            {/* <h5>{props.user}</h5> */}
-            <Button type="button" onClick={changeTaskStatus}>
-              Mark as other status
-            </Button>
-        </div>
-    );
+    };
 
+    if(status == false){
+        return (
+            <div className="task">
+                <h5>{props.title}</h5>
+                <p>Description: {props.description}</p>
+                <p>Estimated Time: {props.time}</p>
+                {/* <p>Status:{props.status}</p>  */}
+                {/* <h5>{props.user}</h5> */}
+                <Button type="button" onClick={changeTaskStatus}>
+                  Mark Task as Complete
+                </Button>
+            </div>
+        );
+
+    }else{
+        return (
+            <div className="task">
+                <h5>{props.title}</h5>
+                <p>Description: {props.description}</p>
+                <p>Estimated Time: {props.time}</p>
+            </div>
+        );
+
+    }
     
   };

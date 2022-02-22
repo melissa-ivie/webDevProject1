@@ -18,10 +18,11 @@ export class TasksService {
     return this.tasksRepository.findOne(id, { relations });
   }
 
-  update(newTask: Task) {
+  update(newid: number, newstatus:string) {
     console.log("inside service");
-    console.log(newTask);
-    return this.tasksRepository.update({ id: newTask.id }, { status: newTask.status }); // tries to update where quantity is 20...
+    console.log(newid);
+    console.log(newstatus);
+    return this.tasksRepository.update({ id: newid }, { status: newstatus }); // tries to update where quantity is 20...
     //return this.tasksRepository.update();
   }
 
