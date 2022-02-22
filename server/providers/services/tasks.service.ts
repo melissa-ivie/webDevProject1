@@ -14,6 +14,15 @@ export class TasksService {
     return this.tasksRepository.find({ relations });
   }
 
+  find(seekid: number) {
+    return this.tasksRepository.findOne({ id: seekid });
+  }
+
+  update(newid: number, newstatus:string) {
+    return this.tasksRepository.update({ id: newid }, { status: newstatus }); // tries to update where quantity is 20...
+    //return this.tasksRepository.update();
+  }
+
   create(newTask: Task) {
     return this.tasksRepository.save(newTask);
   }

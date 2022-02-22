@@ -11,6 +11,7 @@ import { RolesService } from './providers/services/roles.service';
 import { UsersService } from './providers/services/users.service';
 import { ProjectsService } from './providers/services/projects.service';
 import { GuardUtil } from './providers/util/guard.util';
+import { TasksService } from './providers/services/tasks.service';
 
 @Module({
   imports: [TypeOrmModule.forRoot(config), UsersModule],
@@ -20,6 +21,7 @@ import { GuardUtil } from './providers/util/guard.util';
     UsersService,
     RolesService,
     JwtService,
+    TasksService,
     GuardUtil,
     { provide: APP_GUARD, useClass: AuthGuard }, // auth guard should come before roles guard
     { provide: APP_GUARD, useClass: RolesGuard }, // otherwise users won't be authenticated before roles check

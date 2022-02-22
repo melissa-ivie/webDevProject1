@@ -26,6 +26,7 @@ export const Header = (props) => {
         if (res.success) {
             setAuthToken(null);
         }
+        navigate("/signin")
     };
 
     if (loading) {
@@ -41,11 +42,11 @@ export const Header = (props) => {
                     Logout
                 </Button>
             </div>
-            {roles.includes('admin') && (
+            {/* {roles.includes('admin') && (
                 <Button type="button" onClick={() => navigate('/admin')}>
                 Admin
                 </Button>
-            )}
+            )} */}
         </div>
     );
   };

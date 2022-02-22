@@ -6,20 +6,23 @@ import { CreateProjectDto } from 'server/dto/create_project.dto';
 import { Project } from 'server/entities/project.entity';
 import { AuthGuard } from 'server/providers/guards/auth.guard';
 import { ProjectsService } from 'server/providers/services/projects.service';
-import { User } from 'server/entities/user.entity';
-import { UsersService } from 'server/providers/services/users.service';
 
 @Controller()
 export class ProjectsController {
   constructor(
     private projectService: ProjectsService,
-    private usersService: UsersService,
   ) {}
 
   @Get('/projects')
   async index() {
     const projects = await this.projectService.findAll();
     return { projects };
+  }
+
+  @Get('/projectID')
+  async getCurrentProject(@Body() projectBody: Project){
+    const projectID = await this.projectService.find(projectBody.id);
+    return { projectID };
   }
 
   @Post('/project')

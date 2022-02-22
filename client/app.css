@@ -17,11 +17,16 @@
 
 h1 { 
     display: inline;
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 300;
     font-family: Verdana;
     vertical-align: middle;
     margin-left: 36%;
+}
+
+h3{
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .logoutButton{
@@ -30,7 +35,7 @@ h1 {
 }
 
 .pageBody{
-    padding-top: 15%;
+    padding-top: 200px;
     padding-left: 15%;
 }
 
@@ -42,6 +47,46 @@ h4{
     padding-bottom: 40px;
 }
 
+.taskList{
+    padding-bottom: 40px;
+}
+
 .projectButton{
     background-color: darkgreen;
+}
+
+.task { 
+    border: 1px solid black; 
+    margin-bottom: 20px;
+    background-color: #4bc9c9;
+    width: 30%; 
+    padding: 20px; 
+    overflow-wrap: break-word;
+}
+
+.completeTask {
+    padding: 10px; 
+    background-color: lightgray;
+    max-width: 70%;
+}
+
+.h5 {
+    font-size: 20px;
+}
+
+.taskTitle{
+    font-size: large;
+    font-weight: bolder;
+}
+
+.taskCategory{
+    font-size: x-large;
+    font-weight: bolder;
+    color:rgb(14, 77, 77);
+    padding-bottom: 30px;
+}
+
+
+.projectTitle{
+    font-size: xx-large;
 }

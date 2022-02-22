@@ -21,8 +21,13 @@ export const Home = () => {
   }, []);
   const navigate = useNavigate();
 
-  const goToProjectPage = () => {
+  const goToProjectPage = (p, pro) => {
+    sessionStorage.setItem("selectedProject", pro.title);
+    sessionStorage.setItem("refreshProject", "T");
+    sessionStorage.setItem("projectLeader", pro.projectLeaderID);
+    getProjectID(); 
     navigate('/projectPage');
+    window.location.reload(false);
   };
 
   const goToNewProjectPage = () => {
@@ -30,16 +35,31 @@ export const Home = () => {
   };
   
   const getProjects = (email, id) => {
+    sessionStorage.setItem("selectedProject", "None");
+    sessionStorage.setItem("projectID", "-1");
+    sessionStorage.setItem("projectLeader", "None");
     let projectsObj = {};
     for(const proj in projects){
       let currentProject = projects[proj]
       let emails = currentProject.userEmails;
       let prID = currentProject.id; 
       if((Object.values(emails).indexOf(email) > -1) || (currentProject.projectLeaderID == id)){
-        projectsObj[prID] = currentProject.title;
+        projectsObj[prID] = currentProject
       }
     }
     userProjects = Object.assign(userProjects,projectsObj)
+  };
+
+  const getProjectID = () => {
+    selected = sessionStorage.getItem("selectedProject");
+    for(const proj in projects){
+      let currentProject = projects[proj]
+      let title = currentProject.title;
+      let id = currentProject.id
+      if((selected == title)){
+        sessionStorage.setItem("projectID", String(id))
+      }
+    }
   };
 
   if (loading) {
@@ -53,7 +73,7 @@ export const Home = () => {
         <h3>Projects:</h3>
         <div className='projectList'> {getProjects(user.email, user.id)}
           {userProjects.map((pro) => {
-            return <h4><Button type="button" onClick={goToProjectPage}>{pro}</Button></h4>
+            return <h4><Button type="button" onClick={p => goToProjectPage(p,pro)}>{pro.title}</Button></h4>
           })}
         </div>
         <Button type="button" onClick={goToNewProjectPage}>

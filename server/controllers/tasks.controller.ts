@@ -3,38 +3,52 @@ import * as bcrypt from 'bcrypt';
 import { UsersService } from '../providers/services/users.service';
 import { Skip } from '../decorators/skip.decorator';
 import { ProjectsService } from '../providers/services/projects.service';
-import { TasksService } from 'server/providers/services/tasks.service';
+import { TasksService } from '../providers/services/tasks.service';
 import { AuthGuard } from '../providers/guards/auth.guard';
 import { Task } from '../entities/task.entity';
 import { CreateTaskDto } from '../dto/create_task.dto';
+import { UpdateTaskDto } from 'server/dto/update_task.dto';
 import { Response } from 'express';
 
 @Controller()
 export class TasksController {
   constructor(
-    private tasksServices: TasksService,
-    private usersServices: UsersService,
-    private projectService: ProjectsService,
+    private tasksService: TasksService,
   ) {}
 
-  @Get('/projects/:id/task')
+  @Get('/tasks')
   async index() {
-    const task = await this.tasksServices.findAll();
-    return { task };
+    const tasks = await this.tasksService.findAll();
+    return { tasks };
   }
 
-  @Post('/projects/:id/new_task')
+  @Post('/updateTask')
+  @Skip(AuthGuard)
+  async update(@Body() body: UpdateTaskDto, @Res({ passthrough: true }) res: Response) {
+    console.log("called update Task");
+    try {
+      const task = await this.tasksService.update(body.id, body.status);
+      return { task };
+    } catch (e) {
+      throw new HttpException(`Task update failed. ${e.message}`, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @Post('/task')
   @Skip(AuthGuard)
   async create(@Body() body: CreateTaskDto, @Res({ passthrough: true }) res: Response) {
     const newTask = new Task();
     newTask.title = body.title;
     newTask.description = body.description;
     newTask.status = body.status;
+    newTask.assignee = body.assignee;
     newTask.timeEstimation = body.timeEstimation;
-    newTask.assignedUser = body.assignedUser;
+    //newTask.assignedUser = body.assignedUser;
+    newTask.projectID = body.projectID;
+
 
     try {
-      const task = await this.tasksServices.create(newTask);
+      const task = await this.tasksService.create(newTask);
       return { task };
     } catch (e) {
       throw new HttpException(`Task creation failed. ${e.message}`, HttpStatus.BAD_REQUEST);
