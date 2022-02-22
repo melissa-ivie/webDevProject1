@@ -12,15 +12,13 @@ import { Response } from 'express';
 @Controller()
 export class TasksController {
   constructor(
-    private tasksServices: TasksService,
-    private usersServices: UsersService,
-    private projectService: ProjectsService,
+    private tasksService: TasksService,
   ) {}
 
-  @Get('/projects/:id/task')
+  @Get('/tasks')
   async index() {
-    const task = await this.tasksServices.findAll();
-    return { task };
+    const tasks = await this.tasksService.findAll();
+    return { tasks };
   }
 
   @Post('/task')
@@ -36,7 +34,7 @@ export class TasksController {
     newTask.project = body.project;
 
     try {
-      const task = await this.tasksServices.create(newTask);
+      const task = await this.tasksService.create(newTask);
       return { task };
     } catch (e) {
       throw new HttpException(`Task creation failed. ${e.message}`, HttpStatus.BAD_REQUEST);

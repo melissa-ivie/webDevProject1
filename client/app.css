@@ -49,3 +49,16 @@ h4{
 .projectButton{
     background-color: darkgreen;
 }
+
+.task { 
+    border: 1px solid black; 
+    margin-bottom: 20px;
+    background-color: #4bc9c9;
+    width: 30%; 
+    padding: 20px; 
+    overflow-wrap: break-word;
+}
+
+.h5 {
+    font-weight: bold;
+}

@@ -3,6 +3,7 @@ import { ApiContext } from '../../utils/api_context';
 import { Header } from '../common/header';
 import { Button } from '../common/button';
 import { useNavigate } from 'react-router';
+import { Task } from '../common/task';
 
 export const ProjectPage = () => {
   const api = useContext(ApiContext);
@@ -10,8 +11,9 @@ export const ProjectPage = () => {
   const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState(null);
   const [user, setUser] = useState(null);
-  const [project, setProject] = useState(null);
-  const [projectID, setProjectID] = useState(null);
+  const projectID = parseInt(sessionStorage.getItem("projectID"));
+  const projectName = sessionStorage.getItem("selectedProject");
+
   useEffect(async () => {
     const res = await api.get('/users/me');
     setUser(res.user);
@@ -20,12 +22,14 @@ export const ProjectPage = () => {
 
   //get projectID
   useEffect(async () => {
-    const res = await api.get('/projectID');
-    setProjectID(res.projectID);
+    const res = await api.get('/tasks');
+    setTasks(res.tasks);
   }, []);
   const navigate = useNavigate();
 
   const goToDashboard = () => {
+    sessionStorage.setItem("projectID", "-1");
+    sessionStorage.setItem("selectedProject", "None");
     navigate('/');
   };
 
@@ -35,18 +39,19 @@ export const ProjectPage = () => {
     navigate('/newTask')
   }
 
+
   //Need to get the project id
   //id keeps returning null.
-  const getTasks = (projectID) => {
+  const getTasks = () => {
     let tasksObj = {};
     for(const task in tasks){
       let currentTask = tasks[task];
       let taskID = currentTask.id;
-      tasksObj[taskID] = currentTask.title;
-      if((projectID != null)){
-        projectTasks = Object.assign(projectTasks, tasksObj)
+      if((currentTask.projectID == projectID)){
+        tasksObj[taskID] = currentTask;
       }
     }
+    projectTasks = Object.assign(projectTasks,tasksObj)
   };
 
 
@@ -58,8 +63,11 @@ export const ProjectPage = () => {
     <div className='dashboard'>
       <Header text="Project Page"></Header>
       <div className='pageBody'>
-        <h3>Tasks:</h3>
-        <div className='taskList'> {getTasks(projectID)}
+        <h3>Tasks for Project {projectName}</h3>
+        <div className='taskList'> {getTasks()}
+        {projectTasks.map((task) => {
+            return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status}></Task>
+          })}
         </div>
         <Button type="button" onClick={goToNewTaskPage}>Add Task</Button>
         <Button type="button" onClick={goToDashboard}>

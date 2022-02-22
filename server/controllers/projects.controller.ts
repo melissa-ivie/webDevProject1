@@ -6,17 +6,11 @@ import { CreateProjectDto } from 'server/dto/create_project.dto';
 import { Project } from 'server/entities/project.entity';
 import { AuthGuard } from 'server/providers/guards/auth.guard';
 import { ProjectsService } from 'server/providers/services/projects.service';
-import { User } from 'server/entities/user.entity';
-import { UsersService } from 'server/providers/services/users.service';
-import { JwtBody } from 'server/decorators/jwt_body.decorator';
-import { JwtBodyDto } from 'server/dto/jwt_body.dto';
-import { CreateTaskDto } from 'server/dto/create_task.dto';
 
 @Controller()
 export class ProjectsController {
   constructor(
     private projectService: ProjectsService,
-    private usersService: UsersService,
   ) {}
 
   @Get('/projects')
