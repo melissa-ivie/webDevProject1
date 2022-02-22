@@ -7,7 +7,29 @@ import { Button } from '../common/button';
 
 
 export const Task = (props) => {
-    const navigate = useNavigate();   
+    const navigate = useNavigate(); 
+    var id = props.id;
+    var status = props.status;
+    var changeTaskStatus = async () => {
+        sessionStorage.setItem("refreshProject", "T")
+        console.log(status);
+        if(status == false){
+            console.log("inside if");
+            status = true; 
+        }
+        fetch('/updateTask', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id,
+                status:true, 
+            })
+        })
+      };
+    
     return (
         <div className="task">
             <h5>{props.title}</h5>
@@ -15,6 +37,9 @@ export const Task = (props) => {
             <p>Estimated Time: {props.time}</p>
             {/* <p>Status:{props.status}</p>  */}
             {/* <h5>{props.user}</h5> */}
+            <Button type="button" onClick={changeTaskStatus}>
+              Mark as other status
+            </Button>
         </div>
     );
 

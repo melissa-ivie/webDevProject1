@@ -35,7 +35,6 @@ export const NewProject = () => {
         const leaderEmail = String(user.email);
         let users = [];
         users = userEmails.split(',');
-        console.log(users)
         lEmail = {
           leader: leaderEmail
         }

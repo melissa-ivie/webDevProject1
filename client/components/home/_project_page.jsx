@@ -14,6 +14,7 @@ export const ProjectPage = () => {
   const [user, setUser] = useState(null);
   const projectID = parseInt(sessionStorage.getItem("projectID"));
   const projectName = sessionStorage.getItem("selectedProject");
+  const projectRefresh = sessionStorage.getItem("refreshProject");
 
   useEffect(async () => {
     const res = await api.get('/users/me');
@@ -21,8 +22,9 @@ export const ProjectPage = () => {
     setLoading(false);
   }, []);
 
-  //get projectID
+  //get tasks
   useEffect(async () => {
+    console.log("inside use effect for tasks");
     const res = await api.get('/tasks');
     setTasks(res.tasks);
   }, []);
@@ -43,6 +45,8 @@ export const ProjectPage = () => {
 
   //Creates list of all tasks for the project
   const getTasks = () => {
+    incompleteProjectTasks = [];
+    completeProjectTasks = [];
     let itasksObj = {};
     let ctasksObj = {};
     for(const task in tasks){
@@ -59,8 +63,7 @@ export const ProjectPage = () => {
     incompleteProjectTasks = Object.assign(incompleteProjectTasks,itasksObj)
     completeProjectTasks = Object.assign(completeProjectTasks,ctasksObj)
   };
-
-
+ 
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -70,7 +73,7 @@ export const ProjectPage = () => {
       <Header text="Project Page"></Header>
       <div className='pageBody'>
         <h3>Tasks for Project {projectName}</h3>
-        <div className='taskList'> {getTasks()}
+        <div className='taskList'>{getTasks()}
           <div className='incompleteTask'> Incomplete Tasks:
               {incompleteProjectTasks.map((task) => {
                   return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status}></Task>
@@ -78,7 +81,7 @@ export const ProjectPage = () => {
           </div>
           <div className='completeTask'> Complete Tasks:
               {completeProjectTasks.map((task) => {
-                  return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status}></Task>
+                  return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status} projectID={task.projectID}></Task>
                 })}
           </div>
         

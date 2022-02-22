@@ -14,6 +14,17 @@ export class TasksService {
     return this.tasksRepository.find({ relations });
   }
 
+  find(id: number, relations: string[] = []) {
+    return this.tasksRepository.findOne(id, { relations });
+  }
+
+  update(newTask: Task) {
+    console.log("inside service");
+    console.log(newTask);
+    return this.tasksRepository.update({ id: newTask.id }, { status: newTask.status }); // tries to update where quantity is 20...
+    //return this.tasksRepository.update();
+  }
+
   create(newTask: Task) {
     return this.tasksRepository.save(newTask);
   }

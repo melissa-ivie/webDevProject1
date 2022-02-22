@@ -23,9 +23,8 @@ export const Home = () => {
 
   const goToProjectPage = (p, pro) => {
     sessionStorage.setItem("selectedProject", pro);
+    sessionStorage.setItem("refreshProject", "T");
     getProjectID(); 
-    console.log("Go to project id")
-    console.log(sessionStorage.getItem("projectID"))
     navigate('/projectPage');
   };
 
@@ -36,8 +35,6 @@ export const Home = () => {
   const getProjects = (email, id) => {
     sessionStorage.setItem("selectedProject", "None");
     sessionStorage.setItem("projectID", "-1");
-    console.log("Get projects id:")
-    console.log(sessionStorage.getItem("projectID"))
     let projectsObj = {};
     for(const proj in projects){
       let currentProject = projects[proj]
