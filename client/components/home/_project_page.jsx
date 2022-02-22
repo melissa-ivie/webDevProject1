@@ -70,10 +70,12 @@ export const ProjectPage = () => {
 
   return (
     <div className='dashboard'>
+      <div className='page'>
       <Header text={projectName}></Header>
       <div className='pageBody'>
         <h3 className='projectTitle'>Tasks for {projectName}</h3>
         <Button className="return" type="button" onClick={goToDashboard}> Return To Project Dashboard </Button>
+        <Button className="add" type="button" onClick={goToNewTaskPage}>Add Task</Button>
         <div className='taskList'>{getTasks()}
           <div className='incompleteTask'> <h5 className='taskCategory'>Incomplete Tasks:</h5>
               {incompleteProjectTasks.map((task) => {
@@ -85,9 +87,13 @@ export const ProjectPage = () => {
                   return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status} projectID={task.projectID} id={task.id} assignee={task.assignee} user={user}></Task>
                 })}
           </div>
-          <Button className="add" type="button" onClick={goToNewTaskPage}>Add Task</Button>
         </div>
       </div>
+      </div>
+      <footer>
+        <p>Created by Command Line Crusaders</p>
+        <p>Modern Web Development Spring 2022</p>
+      </footer>
     </div>
     
   );

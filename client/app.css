@@ -9,7 +9,7 @@
     width: 100%;
     align-content: center;
     color: white; 
-    background-color: rgb(153, 38, 109); 
+    background-color: rgb(14, 77, 77); 
     position: fixed;
     padding: 3px;
     padding-top: 20px;
@@ -44,15 +44,13 @@ h4{
 }
 
 .projectList{
+    display: inline-block;
     padding-bottom: 40px;
+    max-width: 70%;
 }
 
 .taskList{
     padding-bottom: 40px;
-}
-
-.projectButton{
-    background-color: darkgreen;
 }
 
 .task { 
@@ -93,8 +91,11 @@ h4{
 
 .add{
     margin-top: 20px;
-    background-color: lightblue;
+    margin-right: 30%;
+    background-color:lightblue ;
     padding: 20px;
+    color: black;
+    float: right;
 }
 
 .return{
@@ -103,12 +104,35 @@ h4{
 }
 
 .project{
+    background-color: #4c5464;
     border-radius: 25px;
     font-weight: 500;
     font-size: large;
-    padding: 30px;
-    background-color: rgb(14, 77, 77);
+    padding: 50px;
     color: white;
-    box-shadow: 10px 10px #505064;
+    box-shadow: 6px 6px lightblue;
     margin: 17px;
+}
+
+.project:hover{
+    background-color: #6a768d
+}
+
+footer {
+    text-align: center;
+    background-color: rgb(14, 77, 77);
+    color:white;
+    position:fixed;
+    font-size: xx-small;
+    bottom: 0;
+    width: 100%;
+    height: 2rem; 
+}
+
+.page{
+    overflow: scroll;
+}
+
+.page:after{
+    display:block;
 }

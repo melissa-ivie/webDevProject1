@@ -67,18 +67,22 @@ export const Home = () => {
 
   return (
     <div className='dashboard'>
-      <Header text="Project Dashboard"></Header>
-      <div className='pageBody'>
-        <h3>Projects:</h3>
-        <div className='projectList'> {getProjects(user.email, user.id)}
-          {userProjects.map((pro) => {
-            return <h4><Button type="button" className="project" onClick={p => goToProjectPage(p,pro)}>{pro.title}</Button></h4>
-          })}
+      <div className='page'>
+        <Header text="Project Dashboard"></Header>
+        <div className='pageBody'>
+        <Button className="add" type="button" onClick={goToNewProjectPage}> Add New Project </Button>
+          <h3>Projects:</h3>
+          <div className='projectList'> {getProjects(user.email, user.id)}
+            {userProjects.map((pro) => {
+              return <Button type="button" className="project" onClick={p => goToProjectPage(p,pro)}>{pro.title}</Button>
+            })}
+          </div>
         </div>
-        <Button className="add" type="button" onClick={goToNewProjectPage}>
-          Add New Project
-       </Button>
       </div>
+      <footer>
+        <p>Created by Command Line Crusaders</p>
+        <p>Modern Web Development Spring 2022</p>
+      </footer>
     </div>
     
   );
