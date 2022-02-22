@@ -34,7 +34,7 @@ export const NewProject = () => {
         const projectLeaderID = user.id;
         const leaderEmail = String(user.email);
         let users = [];
-        users = userEmails.split(',');
+        users = userEmails.split(', ');
         lEmail = {
           leader: leaderEmail
         }
@@ -67,7 +67,8 @@ export const NewProject = () => {
         <Paper>
           <div>Project Title</div>
           <Input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-          <div>Emails of Project Members (seperate with commas)</div>
+          <div>Emails of Project Members 
+            <p>(seperate with commas ex: "user1@gmail.com, user2@gmail.com")</p></div>
           <Input type="text" value={userEmails} onChange={(e) => setUsers(e.target.value)} />
           <div className="flex flex-row justify-end mt-2">
             <Button type="button" onClick={newProject}>
