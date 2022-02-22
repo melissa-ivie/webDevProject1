@@ -27,7 +27,6 @@ export const Home = () => {
     sessionStorage.setItem("projectLeader", pro.projectLeaderID);
     getProjectID(); 
     navigate('/projectPage');
-    window.location.reload(false);
   };
 
   const goToNewProjectPage = () => {
@@ -76,7 +75,7 @@ export const Home = () => {
             return <h4><Button type="button" onClick={p => goToProjectPage(p,pro)}>{pro.title}</Button></h4>
           })}
         </div>
-        <Button type="button" onClick={goToNewProjectPage}>
+        <Button className="add" type="button" onClick={goToNewProjectPage}>
           Add New Project
        </Button>
       </div>

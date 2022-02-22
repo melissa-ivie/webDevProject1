@@ -28,11 +28,6 @@ export const ProjectPage = () => {
     setTasks(res.tasks);
   }, []);
 
-  //get project for leaderID
-  // useEffect(async () => {
-  //   const res = await api.get('/pro');
-  //   setTasks(res.tasks);
-  // }, []);
 
   const navigate = useNavigate();
 
@@ -78,6 +73,7 @@ export const ProjectPage = () => {
       <Header text="Project Page"></Header>
       <div className='pageBody'>
         <h3 className='projectTitle'>Tasks for Project {projectName}</h3>
+        <Button className="return" type="button" onClick={goToDashboard}> Return To Project Dashboard </Button>
         <div className='taskList'>{getTasks()}
           <div className='incompleteTask'> <h5 className='taskCategory'>Incomplete Tasks:</h5>
               {incompleteProjectTasks.map((task) => {
@@ -89,12 +85,8 @@ export const ProjectPage = () => {
                   return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status} projectID={task.projectID} id={task.id} assignee={task.assignee} user={user}></Task>
                 })}
           </div>
-        
+          <Button className="add" type="button" onClick={goToNewTaskPage}>Add Task</Button>
         </div>
-        <Button type="button" onClick={goToNewTaskPage}>Add Task</Button>
-        <Button type="button" onClick={goToDashboard}>
-            Go To Project Dashboard
-        </Button>
       </div>
     </div>
     
