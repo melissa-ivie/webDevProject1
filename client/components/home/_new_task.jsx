@@ -18,6 +18,7 @@ export const NewTask = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [projects, setProjects] = useState(null);
   var projectID = parseInt(sessionStorage.getItem("projectID"));
   var projectLeader = sessionStorage.getItem("projectLeader")
 
@@ -27,8 +28,14 @@ export const NewTask = () => {
     setLoading(false);
   }, []);
 
+  useEffect(async () => {
+    const res = await api.get('/projects');
+    setProjects(res.projects);
+  }, []);
+
 
   const newTask = async () => {
+    var emailList = getEmailList(projects);
     if (title === '') {
       setErrorMessage('Task Title cannot be blank');
       return;
@@ -43,6 +50,9 @@ export const NewTask = () => {
       return;
     } else if((projectLeader != user.id) && (assignee != user.email)) {
       setErrorMessage('Only Project Leader can assign tasks to other users.');
+      return;
+    } else if ((!emailList.includes(assignee) && assignee != user.email) && projectLeader == user.id) {
+      setErrorMessage('This user is not apart of the project');
       return;
     }
 
@@ -69,6 +79,21 @@ export const NewTask = () => {
   const cancelAdd = async () => {
     navigate('/projectPage');
   };
+
+  const getEmailList = (projects) => {
+    let projectsObj = {};
+    for(const proj in projects){
+      // console.log(projects)
+      // console.log(proj)
+      let currentProject = projects[proj];
+      let emails = currentProject.userEmails;
+      let prID = currentProject.id;
+      if(projectID == prID){
+        // console.log(emails);
+        return emails;
+      }
+    }
+  }
 
   return (
     <div className="flex flex-row justify-center m-4">
