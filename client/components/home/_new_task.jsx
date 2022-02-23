@@ -70,6 +70,13 @@ export const NewTask = () => {
     navigate('/projectPage');
   };
 
+  const getEmailList = (projID) => {
+    let emailsObj = {};
+    for(const emails in user){
+      let 
+    }
+  }
+
   return (
     <div className="flex flex-row justify-center m-4">
       <div className="w-96">
