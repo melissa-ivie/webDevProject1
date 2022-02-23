@@ -35,7 +35,11 @@ export const NewTask = () => {
   const newTask = async () => {
     var emailList = getEmailList(projects);
     console.log(emailList);
-    console.log(assignee);
+    // console.log(assignee);
+    console.log(projectLeader)
+    console.log(user.email)
+    // console.log(emailList.includes(assignee));
+    // console.log(emailList.includ)
     if (title === '') {
       setErrorMessage('Task Title cannot be blank');
       return;
@@ -52,7 +56,7 @@ export const NewTask = () => {
       setErrorMessage('Only Project Leader can assign tasks to other users.');
       return;
       //Still does not include project leader
-    } else if((!(emailList.includes(assignee))) || (projectLeader === user.id)){
+    } else if(((!(emailList.includes(assignee))) && (assignee != user.email)) && (projectLeader == user.id)){
       setErrorMessage('This user is not apart of the project');
       return;
     }
