@@ -51,7 +51,7 @@ export const NewTask = () => {
     } else if((projectLeader != user.id) && (assignee != user.email)) {
       setErrorMessage('Only Project Leader can assign tasks to other users.');
       return;
-    } else if(!(emailList.includes(assignee))){
+    } else if((!(emailList.includes(assignee))) || (projectLeader === user.id)){
       setErrorMessage('This user is not apart of the project');
       return;
     }
