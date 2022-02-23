@@ -15,6 +15,8 @@ export const ProjectPage = () => {
   const [user, setUser] = useState(null);
   const projectID = parseInt(sessionStorage.getItem("projectID"));
   const projectName = sessionStorage.getItem("selectedProject");
+  const projectLeader = sessionStorage.getItem("projectLeader")
+  var role = ""
 
   useEffect(async () => {
     const res = await api.get('/users/me');
@@ -68,12 +70,19 @@ export const ProjectPage = () => {
     return <div>Loading...</div>;
   }
 
+  if(projectLeader == user.id){
+    role = "You are the Project Leader for this project";
+  }else{
+    role = "You are a Project Member for this project";
+  }
+
   return (
     <div className='dashboard'>
       <div className='page'>
       <Header text={projectName}></Header>
       <div className='pageBody'>
         <h3 className='projectTitle'>Tasks for {projectName}</h3>
+        <h5>{role}</h5> 
         <Button className="return" type="button" onClick={goToDashboard}> Return To Project Dashboard </Button>
         <Button className="add" type="button" onClick={goToNewTaskPage}>Add Task</Button>
         <div className='taskList'>{getTasks()}
