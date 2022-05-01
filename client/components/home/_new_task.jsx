@@ -33,33 +33,16 @@ export const NewTask = () => {
 
 
   const newTask = async () => {
-    var emailList = getEmailList(projects);
-    console.log(emailList);
-    // console.log(assignee);
-    console.log(projectLeader)
-    console.log(user.email)
-    // console.log(emailList.includes(assignee));
-    // console.log(emailList.includ)
+    let assignee = ""
+    let timeEstimation = ""
+
     if (title === '') {
       setErrorMessage('Task Title cannot be blank');
       return;
     } else if (description === '') {
       setErrorMessage('Task Description cannot be blank');
       return;
-    } else if (timeEstimation === '') {
-      setErrorMessage('Task ETA cannot be blank');
-      return;
-    } else if(assignee === '') {
-      setErrorMessage('Assignee can not be blank');
-      return;
-    } else if((projectLeader != user.id) && (assignee != user.email)) {
-      setErrorMessage('Only Project Leader can assign tasks to other users.');
-      return;
-      //Still does not include project leader
-    } else if(((!(emailList.includes(assignee))) && (assignee != user.email)) && (projectLeader == user.id)){
-      setErrorMessage('This user is not apart of the project');
-      return;
-    }
+    } 
 
     fetch('/task', {
       method: 'POST',
@@ -85,20 +68,6 @@ export const NewTask = () => {
     navigate('/projectPage');
   };
 
-  const getEmailList = (projects) => {
-    let projectsObj = {};
-    for(const proj in projects){
-      // console.log(projects)
-      // console.log(proj)
-      let currentProject = projects[proj];
-      let emails = currentProject.userEmails;
-      let prID = currentProject.id;
-      if(projectID = prID){
-        // console.log(emails);
-        return emails;
-      }
-    }
-  }
 
   return (
     <div className="flex flex-row justify-center m-4">
@@ -108,10 +77,6 @@ export const NewTask = () => {
           <Input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
           <div>Task Description</div>
           <Input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
-          <div>Assigned user to task (enter email)</div>
-          <Input type="text" value={assignee} onChange={(e) => setAssignee(e.target.value)} />
-          <div>Task ETA</div>
-          <Input type="text" value={timeEstimation} onChange={(e) => setTimeEstimation(e.target.value)} />
           <div>Mark as complete?</div>
           <select name="completed" id="completed" value={status} onChange={(e) => setStatus(e.target.value)}>
             <option value="no">No</option>

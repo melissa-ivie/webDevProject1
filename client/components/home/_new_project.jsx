@@ -65,14 +65,14 @@ export const NewProject = () => {
     <div className="flex flex-row justify-center m-4">
       <div className="w-96">
         <Paper>
-          <div>Project Title</div>
+          <div>Event Title</div>
           <Input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-          <div>Emails of Project Members 
+          <div>Emails of Event Members 
             <p>(seperate with commas ex: "user1@gmail.com, user2@gmail.com")</p></div>
           <Input type="text" value={userEmails} onChange={(e) => setUsers(e.target.value)} />
           <div className="flex flex-row justify-end mt-2">
             <Button type="button" onClick={newProject}>
-              Add New Project
+              Add New Event
             </Button>
             <Button type="button" onClick={cancelAdd}>
               Cancel

@@ -4,6 +4,7 @@ import { Header } from '../common/header';
 import { Button } from '../common/button';
 import { useNavigate } from 'react-router';
 import { Task } from '../common/task';
+import { ConsoleLogger } from '@nestjs/common';
 
 export const ProjectPage = () => {
   const api = useContext(ApiContext);
@@ -53,6 +54,7 @@ export const ProjectPage = () => {
       let currentTask = tasks[task];
       let taskID = currentTask.id;
       if((currentTask.projectID == projectID)){
+        //console.log(currentTask.status);
         if(currentTask.status){
           ctasksObj[taskID] = currentTask;
         }else{
@@ -74,10 +76,10 @@ export const ProjectPage = () => {
       <Header text={projectName}></Header>
       <div className='pageBody'>
         <h3 className='projectTitle'>Tasks for {projectName}</h3>
-        <Button className="return" type="button" onClick={goToDashboard}> Return To Project Dashboard </Button>
+        <Button className="return" type="button" onClick={goToDashboard}> Return To Event Dashboard </Button>
         <Button className="add" type="button" onClick={goToNewTaskPage}>Add Task</Button>
         <div className='taskList'>{getTasks()}
-          <div className='incompleteTask'> <h5 className='taskCategory'>Incomplete Tasks:</h5>
+          <div className='incompleteTask'> <h5 className='taskCategory'>Unassigned Tasks:</h5>
               {incompleteProjectTasks.map((task) => {
                   return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status}projectID={task.projectID} id={task.id} assignee={task.assignee} user={user}></Task>
                 })}
@@ -91,7 +93,7 @@ export const ProjectPage = () => {
       </div>
       </div>
       <footer>
-        <p>Created by Command Line Crusaders</p>
+        <p>Created by Melissa Ivie</p>
         <p>Modern Web Development Spring 2022</p>
       </footer>
     </div>

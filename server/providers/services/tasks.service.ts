@@ -19,8 +19,11 @@ export class TasksService {
   }
 
   update(newid: number, newstatus:string) {
-    return this.tasksRepository.update({ id: newid }, { status: newstatus }); // tries to update where quantity is 20...
-    //return this.tasksRepository.update();
+    return this.tasksRepository.update({ id: newid }, { status: newstatus });
+  }
+
+  assign(newid: number, newAssignee:string) {
+    return this.tasksRepository.update({ id: newid }, { assignee: newAssignee }); 
   }
 
   create(newTask: Task) {

@@ -68,10 +68,10 @@ export const Home = () => {
   return (
     <div className='dashboard'>
       <div className='page'>
-        <Header text="Project Dashboard"></Header>
+        <Header text="Events Dashboard"></Header>
         <div className='pageBody'>
-        <Button className="add" type="button" onClick={goToNewProjectPage}> Add New Project </Button>
-          <h3>Projects:</h3>
+        <Button className="add" type="button" onClick={goToNewProjectPage}> Add New Event </Button>
+          <h3>Events:</h3>
           <div className='projectList'> {getProjects(user.email, user.id)}
             {userProjects.map((pro) => {
               return <Button type="button" className="project" onClick={p => goToProjectPage(p,pro)}>{pro.title}</Button>
@@ -80,7 +80,7 @@ export const Home = () => {
         </div>
       </div>
       <footer>
-        <p>Created by Command Line Crusaders</p>
+        <p>Created by Melissa Ivie</p>
         <p>Modern Web Development Spring 2022</p>
       </footer>
     </div>

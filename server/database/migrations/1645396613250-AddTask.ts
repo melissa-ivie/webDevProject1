@@ -30,12 +30,12 @@ export class AddTask1645396613250 implements MigrationInterface {
           {
             name: 'timeEstimation',
             type: 'text',
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: 'description',
             type: 'text',
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: 'projectID',

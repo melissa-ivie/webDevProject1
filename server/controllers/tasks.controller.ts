@@ -9,6 +9,7 @@ import { Task } from '../entities/task.entity';
 import { CreateTaskDto } from '../dto/create_task.dto';
 import { UpdateTaskDto } from 'server/dto/update_task.dto';
 import { Response } from 'express';
+import { AssignTaskDto } from 'server/dto/assign_task.dto';
 
 @Controller()
 export class TasksController {
@@ -25,12 +26,24 @@ export class TasksController {
   @Post('/updateTask')
   @Skip(AuthGuard)
   async update(@Body() body: UpdateTaskDto, @Res({ passthrough: true }) res: Response) {
-    console.log("called update Task");
+    console.log("called create Task");
     try {
       const task = await this.tasksService.update(body.id, body.status);
       return { task };
     } catch (e) {
       throw new HttpException(`Task update failed. ${e.message}`, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @Post('/assignTask')
+  @Skip(AuthGuard)
+  async updateAssign(@Body() body: AssignTaskDto, @Res({ passthrough: true }) res: Response) {
+    console.log("called assign Task");
+    try {
+      const task = await this.tasksService.assign(body.id, body.assignee);
+      return { task };
+    } catch (e) {
+      throw new HttpException(`Task assign failed. ${e.message}`, HttpStatus.BAD_REQUEST);
     }
   }
 
