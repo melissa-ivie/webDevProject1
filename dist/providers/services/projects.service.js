@@ -35,8 +35,8 @@ let ProjectsService = class ProjectsService {
     create(newProject) {
         return this.projectsRespository.save(newProject);
     }
-    end(proID) {
-        return this.projectsRespository.softDelete({ id: proID });
+    update(newid) {
+        return this.projectsRespository.update({ id: newid }, { userEmails: [] });
     }
 };
 ProjectsService = __decorate([

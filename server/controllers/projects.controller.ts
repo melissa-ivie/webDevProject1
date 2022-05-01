@@ -30,8 +30,8 @@ export class ProjectsController {
   @Post('/endProj')
   async end(@Body() body: EndDto, @Res({ passthrough: true }) res: Response) {
     try {
-      let id = Number(body.id)
-      const proj = await this.projectService.end(id);
+      let id = Number(body.id);
+      const proj = await this.projectService.update(id);
       return { proj };
     } catch (e) {
       throw new HttpException(`Project Deletion Failed. ${e.message}`, HttpStatus.BAD_REQUEST);

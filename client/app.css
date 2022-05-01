@@ -54,9 +54,27 @@ h4{
 }
 
 .task { 
-    border: 1px solid #030b2d; 
+    border: 1px solid #461220; 
     margin-bottom: 20px;
     background-color: #fcb9b2;
+    width: 30%; 
+    padding: 20px; 
+    overflow-wrap: break-word;
+}
+
+.unassignedTask { 
+    border: 6px solid #461220; 
+    margin-bottom: 20px;
+    background-color: #fcb9b2;
+    width: 30%; 
+    padding: 20px; 
+    overflow-wrap: break-word;
+}
+
+.assignedTask { 
+    border: 1px solid #461220; 
+    margin-bottom: 20px;
+    background-color: #f1c7c2;
     width: 30%; 
     padding: 20px; 
     overflow-wrap: break-word;
@@ -67,6 +85,12 @@ h4{
     background-color: lightgray;
     max-width: 70%;
 }
+
+.incompleteTask {
+    padding: 10px; 
+    max-width: 70%;
+}
+
 
 .h5 {
     font-size: 20px;

@@ -11,6 +11,7 @@ export const ProjectPage = () => {
   var incompleteProjectTasks = [];
   var completeProjectTasks = [];
   var myProjectTasks = [];
+  var unassignedProjectTasks = [];
   const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState(null);
   const [project, setProjects] = useState(null);
@@ -66,10 +67,13 @@ export const ProjectPage = () => {
   const getTasks = () => {
     incompleteProjectTasks = [];
     completeProjectTasks = [];
+    unassignedProjectTasks =[];
     myProjectTasks =[];
     let itasksObj = {};
     let ctasksObj = {};
     let mtasksObj = {};
+    let utasksObj = {};
+
     for(const task in tasks){
       let currentTask = tasks[task];
       let taskID = currentTask.id;
@@ -80,6 +84,8 @@ export const ProjectPage = () => {
         }else{
           if(currentTask.assignee == user.email){
             mtasksObj[taskID] = currentTask;
+          }else if(currentTask.assignee == ""){
+            utasksObj[taskID] = currentTask;
           }else{
             itasksObj[taskID] = currentTask;
           }
@@ -89,6 +95,7 @@ export const ProjectPage = () => {
     incompleteProjectTasks = Object.assign(incompleteProjectTasks,itasksObj)
     completeProjectTasks = Object.assign(completeProjectTasks,ctasksObj)
     myProjectTasks = Object.assign(myProjectTasks,mtasksObj)
+    unassignedProjectTasks = Object.assign(unassignedProjectTasks,utasksObj)
   };
  
   if (loading) {
@@ -100,21 +107,25 @@ export const ProjectPage = () => {
       <div className='page'>
       <Header text={projectName}></Header>
       <div className='pageBody'>
-        <h3 className='projectTitle'>Tasks for {projectName}</h3>
         <Button className="return" type="button" onClick={goToDashboard}> Return To Event Dashboard </Button>
-        <Button className="add" type="button" onClick={goToNewTaskPage}>Add Task</Button>
+        <Button className="add" type="button" onClick={goToNewTaskPage}>Add Job</Button>
         <div className='taskList'>{getTasks()}
-          <div className='myTask'>  <h5 className='taskCategory'>My To Do:</h5>
+          <div className='myTasks'>  <h5 className='taskCategory'>My To Do:</h5>
                 {myProjectTasks.map((task) => {
                     return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status} projectID={task.projectID} id={task.id} assignee={task.assignee} user={user}></Task>
                   })}
           </div>
-          <div className='incompleteTask'> <h5 className='taskCategory'>Unassigned Tasks:</h5>
+          <div className='undoneTasks'>  <h5 className='taskCategory'>Unassigned Jobs</h5>
+                {unassignedProjectTasks.map((task) => {
+                    return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status} projectID={task.projectID} id={task.id} assignee={task.assignee} user={user}></Task>
+                  })}
+          </div>
+          <div className='incompleteTask'> <h5 className='taskCategory'>Assigned Jobs:</h5>
               {incompleteProjectTasks.map((task) => {
                   return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status}projectID={task.projectID} id={task.id} assignee={task.assignee} user={user}></Task>
                 })}
           </div>
-          <div className='completeTask'>  <h5 className='taskCategory'>Completed Tasks:</h5>
+          <div className='completeTask'>  <h5 className='taskCategory'>Completed Jobs:</h5>
               {completeProjectTasks.map((task) => {
                   return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status} projectID={task.projectID} id={task.id} assignee={task.assignee} user={user}></Task>
                 })}

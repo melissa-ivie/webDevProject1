@@ -73,9 +73,9 @@ export const NewTask = () => {
     <div className="flex flex-row justify-center m-4">
       <div className="w-96">
         <Paper>
-          <div>Task Title</div>
+          <div>Job Title</div>
           <Input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-          <div>Task Description</div>
+          <div>Job Description</div>
           <Input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
           <div>Mark as complete?</div>
           <select name="completed" id="completed" value={status} onChange={(e) => setStatus(e.target.value)}>
@@ -84,7 +84,7 @@ export const NewTask = () => {
           </select>
           <div className="flex flex-row justify-end mt-2">
             <Button type="button" onClick={newTask}>
-              Add New Task
+              Add New Job
             </Button>
             <Button type="button" onClick={cancelAdd}>
               Cancel

@@ -35,7 +35,7 @@ let ProjectsController = class ProjectsController {
     async end(body, res) {
         try {
             let id = Number(body.id);
-            const proj = await this.projectService.end(id);
+            const proj = await this.projectService.update(id);
             return { proj };
         }
         catch (e) {

@@ -51,12 +51,12 @@ export const Task = (props) => {
     if(status == false){
         if(user.email == taskAssignee){
             return (
-                <div className="task">
+                <div className="unassignedTask">
                     <h5 className='taskTitle'>{props.title}</h5>
                     <p>Description: {props.description}</p>
                     <p>Assigned User: {taskAssignee}</p>
                     <Button type="button" onClick={changeTaskStatus}>
-                      Mark Task as Complete
+                      Mark as Done
                     </Button>
                 </div>
             );
@@ -67,13 +67,13 @@ export const Task = (props) => {
                     <p>Description: {props.description}</p>
                     <p>Assigned User: {taskAssignee}</p>
                     <Button type="button" onClick={assignTask}>
-                      Assign Task to Me
+                      Assign to Me
                     </Button>
                 </div>
             );
         }else{
             return (
-                <div className="task">
+                <div className="assignedTask">
                     <h5 className='taskTitle'>{props.title}</h5>
                     <p>Description: {props.description}</p>
                     <p>Assigned User: {taskAssignee}</p>
@@ -83,7 +83,7 @@ export const Task = (props) => {
 
     }else{
         return (
-        <div className="task">
+        <div className="assignedTask">
             <h5 className='taskTitle'>{props.title}</h5>
             <p>Description: {props.description}</p>
             <p>Estimated Time: {props.time}</p>

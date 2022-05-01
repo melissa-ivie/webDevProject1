@@ -9,5 +9,5 @@ export declare class ProjectsService {
     findBy(options: Record<number, any>): Promise<Project>;
     find(id: number, relations?: string[]): Promise<Project>;
     create(newProject: Project): Promise<Project>;
-    end(proID: number): Promise<import("typeorm").UpdateResult>;
+    update(newid: number): Promise<import("typeorm").UpdateResult>;
 }
