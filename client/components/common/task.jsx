@@ -28,7 +28,7 @@ export const Task = (props) => {
             })
         })
 
-        //window.location.reload(false);
+        window.location.reload(false);
     };
 
     var assignTask = async () => {
@@ -81,6 +81,14 @@ export const Task = (props) => {
             );
         }
 
+    }else{
+        return (
+        <div className="task">
+            <h5 className='taskTitle'>{props.title}</h5>
+            <p>Description: {props.description}</p>
+            <p>Estimated Time: {props.time}</p>
+            <p>Assigned User: {assignee}</p>
+        </div>
+        );
     }
-    
   };

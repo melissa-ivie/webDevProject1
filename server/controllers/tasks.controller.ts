@@ -26,7 +26,6 @@ export class TasksController {
   @Post('/updateTask')
   @Skip(AuthGuard)
   async update(@Body() body: UpdateTaskDto, @Res({ passthrough: true }) res: Response) {
-    console.log("called create Task");
     try {
       const task = await this.tasksService.update(body.id, body.status);
       return { task };
@@ -38,7 +37,6 @@ export class TasksController {
   @Post('/assignTask')
   @Skip(AuthGuard)
   async updateAssign(@Body() body: AssignTaskDto, @Res({ passthrough: true }) res: Response) {
-    console.log("called assign Task");
     try {
       const task = await this.tasksService.assign(body.id, body.assignee);
       return { task };

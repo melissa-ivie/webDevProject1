@@ -19,6 +19,7 @@ const create_project_dto_1 = require("../dto/create_project.dto");
 const project_entity_1 = require("../entities/project.entity");
 const auth_guard_1 = require("../providers/guards/auth.guard");
 const projects_service_1 = require("../providers/services/projects.service");
+const end_dto_1 = require("../dto/end.dto");
 let ProjectsController = class ProjectsController {
     constructor(projectService) {
         this.projectService = projectService;
@@ -30,6 +31,16 @@ let ProjectsController = class ProjectsController {
     async getCurrentProject(projectBody) {
         const projectID = await this.projectService.find(projectBody.id);
         return { projectID };
+    }
+    async end(body, res) {
+        try {
+            let id = Number(body.id);
+            const proj = await this.projectService.end(id);
+            return { proj };
+        }
+        catch (e) {
+            throw new common_1.HttpException(`Project Deletion Failed. ${e.message}`, common_1.HttpStatus.BAD_REQUEST);
+        }
     }
     async create(body, res) {
         const newProject = new project_entity_1.Project();
@@ -58,6 +69,14 @@ __decorate([
     __metadata("design:paramtypes", [project_entity_1.Project]),
     __metadata("design:returntype", Promise)
 ], ProjectsController.prototype, "getCurrentProject", null);
+__decorate([
+    (0, common_1.Post)('/endProj'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)({ passthrough: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [end_dto_1.EndDto, Object]),
+    __metadata("design:returntype", Promise)
+], ProjectsController.prototype, "end", null);
 __decorate([
     (0, common_1.Post)('/project'),
     (0, skip_decorator_1.Skip)(auth_guard_1.AuthGuard),

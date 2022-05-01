@@ -35,6 +35,9 @@ let ProjectsService = class ProjectsService {
     create(newProject) {
         return this.projectsRespository.save(newProject);
     }
+    end(proID) {
+        return this.projectsRespository.softDelete({ id: proID });
+    }
 };
 ProjectsService = __decorate([
     (0, common_1.Injectable)(),

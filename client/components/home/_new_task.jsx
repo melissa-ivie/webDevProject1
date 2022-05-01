@@ -79,8 +79,8 @@ export const NewTask = () => {
           <Input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
           <div>Mark as complete?</div>
           <select name="completed" id="completed" value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option value="no">No</option>
-            <option value="yes">Yes</option>
+            <option value="false">No</option>
+            <option value="true">Yes</option>
           </select>
           <div className="flex flex-row justify-end mt-2">
             <Button type="button" onClick={newTask}>

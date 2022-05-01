@@ -10,6 +10,7 @@ export const ProjectPage = () => {
   const api = useContext(ApiContext);
   var incompleteProjectTasks = [];
   var completeProjectTasks = [];
+  var myProjectTasks = [];
   const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState(null);
   const [project, setProjects] = useState(null);
@@ -43,13 +44,32 @@ export const ProjectPage = () => {
     navigate('/newTask')
   }
 
+  const endProject = () =>{
+    let id = projectID
+    fetch('/endProj', {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          id
+      })
+    })
+    sessionStorage.setItem("projectID", "-1");
+    sessionStorage.setItem("selectedProject", "None");
+    navigate('/');
+  }
+
 
   //Creates list of all tasks for the project
   const getTasks = () => {
     incompleteProjectTasks = [];
     completeProjectTasks = [];
+    myProjectTasks =[];
     let itasksObj = {};
     let ctasksObj = {};
+    let mtasksObj = {};
     for(const task in tasks){
       let currentTask = tasks[task];
       let taskID = currentTask.id;
@@ -58,12 +78,17 @@ export const ProjectPage = () => {
         if(currentTask.status){
           ctasksObj[taskID] = currentTask;
         }else{
-          itasksObj[taskID] = currentTask;
+          if(currentTask.assignee == user.email){
+            mtasksObj[taskID] = currentTask;
+          }else{
+            itasksObj[taskID] = currentTask;
+          }
         }
       }
     }
     incompleteProjectTasks = Object.assign(incompleteProjectTasks,itasksObj)
     completeProjectTasks = Object.assign(completeProjectTasks,ctasksObj)
+    myProjectTasks = Object.assign(myProjectTasks,mtasksObj)
   };
  
   if (loading) {
@@ -79,6 +104,11 @@ export const ProjectPage = () => {
         <Button className="return" type="button" onClick={goToDashboard}> Return To Event Dashboard </Button>
         <Button className="add" type="button" onClick={goToNewTaskPage}>Add Task</Button>
         <div className='taskList'>{getTasks()}
+          <div className='myTask'>  <h5 className='taskCategory'>My To Do:</h5>
+                {myProjectTasks.map((task) => {
+                    return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status} projectID={task.projectID} id={task.id} assignee={task.assignee} user={user}></Task>
+                  })}
+          </div>
           <div className='incompleteTask'> <h5 className='taskCategory'>Unassigned Tasks:</h5>
               {incompleteProjectTasks.map((task) => {
                   return <Task title = {task.title} description={task.description} time={task.timeEstimation} status={task.status}projectID={task.projectID} id={task.id} assignee={task.assignee} user={user}></Task>

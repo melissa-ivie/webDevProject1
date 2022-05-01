@@ -34,4 +34,8 @@ export class ProjectsService {
     return this.projectsRespository.save(newProject);
   }
 
+  end(proID: number) {
+    return this.projectsRespository.softDelete({ id:proID });
+  }
+
 }

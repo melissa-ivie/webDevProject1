@@ -30,7 +30,6 @@ let TasksController = class TasksController {
         return { tasks };
     }
     async update(body, res) {
-        console.log("called create Task");
         try {
             const task = await this.tasksService.update(body.id, body.status);
             return { task };
@@ -40,7 +39,6 @@ let TasksController = class TasksController {
         }
     }
     async updateAssign(body, res) {
-        console.log("called assign Task");
         try {
             const task = await this.tasksService.assign(body.id, body.assignee);
             return { task };

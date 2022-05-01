@@ -6,6 +6,7 @@ import { CreateProjectDto } from 'server/dto/create_project.dto';
 import { Project } from 'server/entities/project.entity';
 import { AuthGuard } from 'server/providers/guards/auth.guard';
 import { ProjectsService } from 'server/providers/services/projects.service';
+import { EndDto } from 'server/dto/end.dto';
 
 @Controller()
 export class ProjectsController {
@@ -23,6 +24,18 @@ export class ProjectsController {
   async getCurrentProject(@Body() projectBody: Project){
     const projectID = await this.projectService.find(projectBody.id);
     return { projectID };
+  }
+
+
+  @Post('/endProj')
+  async end(@Body() body: EndDto, @Res({ passthrough: true }) res: Response) {
+    try {
+      let id = Number(body.id)
+      const proj = await this.projectService.end(id);
+      return { proj };
+    } catch (e) {
+      throw new HttpException(`Project Deletion Failed. ${e.message}`, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Post('/project')
